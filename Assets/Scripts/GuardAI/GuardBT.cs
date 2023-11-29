@@ -3,7 +3,8 @@ using BehaviourTree;
 using UnityEditor;
 
 /// <summary>
-/// ordering is important in this setup tree. 
+/// ordering is important in this setup tree. whatever is defined first will have top priority (so it'll execute over the already running tasks)
+/// that's why, in this case, patrolling is last. since we only want it to patrol when all else fails. 
 ///  this is what gives the priority that you defined when drawing the behaviour tree on paper(if you did that)
 /// </summary>
 /// <returns></returns>
