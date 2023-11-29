@@ -13,7 +13,7 @@ public class TaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
-        Transform target = (Transform)GetData(GuardBT.target);
+        Transform target = (Transform)GetData(GuardBT.targetStr);
 
         if (Vector3.Distance(transform.position, target.position) > 0.01)
         {
@@ -23,7 +23,7 @@ public class TaskGoToTarget : Node
 
         if (Vector3.Distance(transform.position, target.position) >= GuardBT.DetectionRange)
         {
-            ClearData(GuardBT.target);
+            ClearData(GuardBT.targetStr);
             Debug.Log("out of range");
         }
         state = NodeState.RUNNING;

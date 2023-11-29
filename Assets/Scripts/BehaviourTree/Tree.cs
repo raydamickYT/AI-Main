@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace BehaviourTree
 
         protected void Start()
         {
+            //zorg dat initialization BOVEN staat. het moet voor alles geroepen worden.
+            Initialization();
             root = SetupTree();
         }
 
@@ -21,5 +24,6 @@ namespace BehaviourTree
             }
         }
         protected abstract Node SetupTree();
+        protected virtual void Initialization() { }
     }
 }

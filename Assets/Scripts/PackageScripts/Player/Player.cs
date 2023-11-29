@@ -6,13 +6,15 @@ public class Player : MonoBehaviour
 {
     public Transform Camera;
     [SerializeField] private float rotationSpeed = 180f;
-    [SerializeField] private float moveSpeed = 3;
+    [SerializeField] private float originalMoveSpeed = 6;
     [SerializeField] private float deathForce = 1000;
     [SerializeField] private GameObject ragdoll;
+    private float moveSpeed;
     private Rigidbody rb;
     private Animator animator;
     private float vert = 0;
     private float hor = 0;
+    private bool crouch = false;
     private Vector3 moveDirection;
     private Collider mainCollider;
     // Start is called before the first frame update
@@ -41,8 +43,28 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerMovement();
+    }
+
+    private void PlayerMovement()
+    {
         vert = Input.GetAxis("Vertical");
         hor = Input.GetAxis("Horizontal");
+        crouch = Input.GetKey(KeyCode.LeftControl);
+
+        if (crouch)
+        {
+            moveSpeed = originalMoveSpeed / 2;
+
+            bool isMoving = hor != 0 || vert != 0;
+            ChangeAnimation(isMoving ? "Walk Crouch" : "Crouch Idle", isMoving ? 0.15f : 0.15f);
+        }
+        else
+        {
+            moveSpeed = originalMoveSpeed;
+            bool isMoving = hor != 0 || vert != 0;
+            ChangeAnimation(isMoving ? "Run" : "Idle", isMoving ? 0.05f : 0.15f);
+        }
         Vector3 forwardDirection = Vector3.Scale(new Vector3(1, 0, 1), Camera.transform.forward);
         Vector3 rightDirection = Vector3.Cross(Vector3.up, forwardDirection.normalized);
         moveDirection = forwardDirection.normalized * vert + rightDirection.normalized * hor;
@@ -51,14 +73,6 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveDirection.normalized, Vector3.up), rotationSpeed * Time.deltaTime);
         }
         transform.position += moveDirection.normalized * moveSpeed * Time.deltaTime;
-
-        bool isMoving = hor != 0 || vert != 0;
-        ChangeAnimation(isMoving ? "Walk Crouch" : "Crouch Idle", isMoving ? 0.05f : 0.15f);
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     public void TakeDamage(GameObject attacker, int damage)
@@ -76,7 +90,7 @@ public class Player : MonoBehaviour
         {
             rib.isKinematic = false;
             rib.useGravity = true;
-            rib.AddForce(Vector3.Scale(new Vector3(1,0.5f,1),(transform.position - attacker.transform.position).normalized * deathForce));
+            rib.AddForce(Vector3.Scale(new Vector3(1, 0.5f, 1), (transform.position - attacker.transform.position).normalized * deathForce));
         }
         ragdoll.transform.SetParent(null);
 
@@ -86,13 +100,13 @@ public class Player : MonoBehaviour
     private void GetComponentsRecursively<T>(GameObject obj, ref List<T> components)
     {
         T component = obj.GetComponent<T>();
-        if(component != null)
+        if (component != null)
         {
             components.Add(component);
         }
-        foreach(Transform t in obj.transform)
+        foreach (Transform t in obj.transform)
         {
-            if(t.gameObject == obj) { continue; }
+            if (t.gameObject == obj) { continue; }
             GetComponentsRecursively<T>(t.gameObject, ref components);
         }
     }

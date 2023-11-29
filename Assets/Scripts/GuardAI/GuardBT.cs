@@ -12,11 +12,12 @@ public class GuardBT : Tree
 {
     public UnityEngine.Transform[] WayPoints;
     public static float speed = 2, DetectionRange = 6, AtkRange = 1;
-    public static string target = "target";
+    public bool IsAllowedToTrack = false;
+    public static string targetStr = "target";
 
     protected override Node SetupTree()
     {
-        Node Root = new Selector(new List<Node>{
+        Node Root = IsAllowedToTrack ? new Selector(new List<Node>{
             new Sequence(new List<Node>{
                 new CheckEnemyInAttackRange(transform),
                 new TaskAttackTarget(transform),
@@ -26,7 +27,8 @@ public class GuardBT : Tree
                 new TaskGoToTarget(transform),
             }),
             new TaskPatrol(transform, WayPoints),
-        });
+        }) :
+        new TaskPatrol(transform, WayPoints);
 
         return Root;
     }

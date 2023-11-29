@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CheckEnemyInFOVRange : Node
 {
-    private static int enemyLayerMask = 1 << 6;
+    private static int targetLayerMask = 1 << 6;
     private Transform transform;
 
     public CheckEnemyInFOVRange(Transform _transform)
@@ -13,15 +13,15 @@ public class CheckEnemyInFOVRange : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.target);
+        object t = GetData(GuardBT.targetStr);
         if (t == null)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, GuardBT.DetectionRange, enemyLayerMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, GuardBT.DetectionRange, targetLayerMask);
             if (colliders.Length > 0)
             {
                 //we store the collider  the root in case we collide with an enemy. 
                 //the root is 2 levels above, thus the parent.parent
-                Parent.Parent.SetData(GuardBT.target, colliders[0].transform);
+                Parent.Parent.SetData(GuardBT.targetStr, colliders[0].transform);
 
                 state = NodeState.SUCCES;
                 return state;

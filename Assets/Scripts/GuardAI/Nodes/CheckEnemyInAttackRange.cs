@@ -13,7 +13,7 @@ public class CheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.target);
+        object t = GetData(GuardBT.targetStr);
         if (t == null)
         {
             //if no collider was found, the node has failed
