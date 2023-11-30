@@ -22,8 +22,11 @@ MonoBehaviour:
   TreeMask:
     serializedVersion: 2
     m_Bits: 8
-  PerceptionRadius: 10
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  PerceptionRadius: 100
   DangerPerceptionRadius: 10
   StopDist: 2
-  SlowDist: 10
+  SlowDist: 4
   AvoidanceRadius: 1

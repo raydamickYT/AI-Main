@@ -209,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 1068770759257855577, guid: 4caff863759884b46814ab36d798cedc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.55
+      value: 4.19
       objectReference: {fileID: 0}
     - target: {fileID: 1068770759257855577, guid: 4caff863759884b46814ab36d798cedc,
         type: 3}
@@ -219,7 +219,7 @@ PrefabInstance:
     - target: {fileID: 1068770759257855577, guid: 4caff863759884b46814ab36d798cedc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.11
+      value: 9.81
       objectReference: {fileID: 0}
     - target: {fileID: 1068770759257855577, guid: 4caff863759884b46814ab36d798cedc,
         type: 3}
@@ -697,7 +697,7 @@ MonoBehaviour:
   - {fileID: 2068960147}
   - {fileID: 2026544574}
   - {fileID: 309418479}
-  IsAllowedToTrack: 1
+  IsAllowedToTrack: 0
 --- !u!136 &512995713
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -817,7 +817,7 @@ PrefabInstance:
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.55
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
@@ -827,7 +827,7 @@ PrefabInstance:
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.11
+      value: 17.529999
       objectReference: {fileID: 0}
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 1110113103}
   - component: {fileID: 1110113102}
   - component: {fileID: 1110113101}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,6 +1276,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 277484363267734877, guid: ac3ac097f8ce456479a8860ddaf176d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2402993081482361934, guid: ac3ac097f8ce456479a8860ddaf176d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1344,6 +1349,7 @@ GameObject:
   - component: {fileID: 1854724389}
   - component: {fileID: 1854724388}
   - component: {fileID: 1854724392}
+  - component: {fileID: 1854724393}
   m_Layer: 0
   m_Name: Ally
   m_TagString: Untagged
@@ -1433,7 +1439,7 @@ Transform:
   m_GameObject: {fileID: 1854724387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.51, y: 0.75, z: -14.59}
+  m_LocalPosition: {x: 8.45, y: 0.75, z: 12.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1453,6 +1459,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allySettings: {fileID: 11400000, guid: d2adfc72d71c68c4eabd49fe6e2c28fa, type: 2}
   PlayerTransform: {fileID: 1100005964}
+  Nav: {fileID: 1854724393}
+--- !u!195 &1854724393
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854724387}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1944931951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,6 +1514,69 @@ Transform:
   - {fileID: 1110113100}
   - {fileID: 1788809083}
   - {fileID: 127146741}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1945209362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1945209364}
+  - component: {fileID: 1945209363}
+  m_Layer: 0
+  m_Name: NavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1945209363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945209362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 264
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: a0ac65b5f6d405d4d8e35b7d5842ed84, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &1945209364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945209362}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.804389, y: -9.604395, z: -1.8860521}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2026544573
@@ -1666,6 +1758,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 277484363267734877, guid: ac3ac097f8ce456479a8860ddaf176d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2402993081482361934, guid: ac3ac097f8ce456479a8860ddaf176d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1730,6 +1827,7 @@ SceneRoots:
   - {fileID: 521032563}
   - {fileID: 1854724391}
   - {fileID: 610916123}
+  - {fileID: 1945209364}
   - {fileID: 1944931952}
   - {fileID: 2913204275829740616}
   - {fileID: 1854319868}
