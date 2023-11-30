@@ -697,7 +697,7 @@ MonoBehaviour:
   - {fileID: 2068960147}
   - {fileID: 2026544574}
   - {fileID: 309418479}
-  IsAllowedToTrack: 1
+  IsAllowedToTrack: 0
 --- !u!136 &512995713
 CapsuleCollider:
   m_ObjectHideFlags: 0

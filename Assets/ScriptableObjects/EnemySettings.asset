@@ -15,12 +15,9 @@ MonoBehaviour:
   minSpeed: 0
   maxSpeed: 3
   targetStr: enemyTarget
-  EnemyMask:
+  TargetMask:
     serializedVersion: 2
-    m_Bits: 0
-  TreeMask:
-    serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   PerceptionRadius: 6
   AtkRange: 2
   StopDist: 1

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CheckEnemyInAttackRange : Node
 {
-    private static int enemyLayerMask = 1 << 6;
     private Transform transform;
 
     public CheckEnemyInAttackRange(Transform _transform)
