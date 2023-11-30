@@ -13,17 +13,16 @@ public class CheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.targetStr);
+        object t = GetData(GuardBT.settings.targetStr);
         if (t == null)
         {
             //if no collider was found, the node has failed
             state = NodeState.FAILURE;
             return state;
         }
-
         //no need for a 2nd collision detection, because we already have the target pos in the dictionary, since it's been found (not null)
         Transform target = (Transform)t;
-        if (Vector3.Distance(transform.position, target.position) <= GuardBT.AtkRange)
+        if (Vector3.Distance(transform.position, target.position) <= GuardBT.settings.AtkRange)
         {
             state = NodeState.SUCCES;
             return state;

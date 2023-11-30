@@ -9,21 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5f865ce6e934546aac1fc359640025, type: 3}
-  m_Name: AllySettings
+  m_Script: {fileID: 11500000, guid: 96a518c041755f7498e4cf34766f92e3, type: 3}
+  m_Name: EnemySettings
   m_EditorClassIdentifier: 
-  minSpeed: 2
-  maxSpeed: 5
-  PlayerTargetStr: playerTarget
-  TreeStr: TreeStr
+  minSpeed: 0
+  maxSpeed: 3
+  targetStr: enemyTarget
   EnemyMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   TreeMask:
     serializedVersion: 2
-    m_Bits: 8
-  PerceptionRadius: 10
-  DangerPerceptionRadius: 10
-  StopDist: 2
-  SlowDist: 10
+    m_Bits: 0
+  PerceptionRadius: 6
+  AtkRange: 2
+  StopDist: 1
+  SlowDist: 5
   AvoidanceRadius: 1

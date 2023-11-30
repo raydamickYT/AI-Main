@@ -33,7 +33,9 @@ public class TaskPatrol : Node
         else
         {
             Transform wp = wayPoints[currentWayPointIndex];
-            if (Vector3.Distance(transform.position, wp.position) < 0.01f)
+            float distanceToWayPoint = Vector3.Distance(transform.position, wp.position);
+
+            if (distanceToWayPoint < 0.5f)
             {
                 // transform.position = wp.position;
                 waitCounter = 0;
@@ -43,7 +45,7 @@ public class TaskPatrol : Node
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, wp.position, GuardBT.speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, wp.position, GuardBT.settings.patrollingSpeed(distanceToWayPoint) * Time.deltaTime);
                 transform.LookAt(wp.position);
             }
 

@@ -13,17 +13,19 @@ public class TaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
-        Transform target = (Transform)GetData(GuardBT.targetStr);
-
-        if (Vector3.Distance(transform.position, target.position) > 0.01)
+        Transform target = (Transform)GetData(GuardBT.settings.targetStr);
+        float dist = Vector3.Distance(transform.position, target.position);
+        //checks if target is near the target
+        if (dist > GuardBT.settings.StopDist)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, GuardBT.speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, GuardBT.settings.persueSpeed(dist) * Time.deltaTime);
             transform.LookAt(target.position);
         }
 
-        if (Vector3.Distance(transform.position, target.position) >= GuardBT.DetectionRange)
+        //checks if target is still in range.
+        if (Vector3.Distance(transform.position, target.position) >= GuardBT.settings.PerceptionRadius)
         {
-            ClearData(GuardBT.targetStr);
+            ClearData(GuardBT.settings.targetStr);
             Debug.Log("out of range");
         }
         state = NodeState.RUNNING;

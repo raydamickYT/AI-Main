@@ -6,14 +6,14 @@ using UnityEngine;
 public class AllySettings : ScriptableObject
 {
     // Settings
-    public float minSpeed = 2;
+    public float minSpeed = 0;
     public float maxSpeed = 5;
     public string PlayerTargetStr = "playerTarget";
     public string TreeStr = "TreeStr";
     public float speed(float dist)
     {
         float proportionalDistance = (dist - StopDist) / (SlowDist - StopDist);
-        float speed = UnityEngine.Mathf.Lerp(0, maxSpeed, proportionalDistance);
+        float speed = UnityEngine.Mathf.Lerp(minSpeed, maxSpeed, proportionalDistance);
 
         return speed;
     }

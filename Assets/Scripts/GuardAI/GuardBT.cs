@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BehaviourTree;
 using UnityEditor;
@@ -10,10 +11,10 @@ using UnityEditor;
 /// <returns></returns>
 public class GuardBT : Tree
 {
+    public EnemySettings _settings;
+    public static EnemySettings settings;
     public UnityEngine.Transform[] WayPoints;
-    public static float speed = 2, DetectionRange = 6, AtkRange = 1;
     public bool IsAllowedToTrack = false;
-    public static string targetStr = "target";
 
     protected override Node SetupTree()
     {
@@ -31,5 +32,17 @@ public class GuardBT : Tree
         new TaskPatrol(transform, WayPoints);
 
         return Root;
+    }
+
+    protected override void Initialization()
+    {
+        if (_settings == null)
+        {
+            UnityEngine.Debug.LogWarning("EnemySettings.cs is not assigned in GuardBT");
+        }
+        else
+        {
+            settings = _settings;
+        }
     }
 }

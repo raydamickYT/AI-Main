@@ -15,7 +15,7 @@ public class TaskAttackTarget : Node
 
     public override NodeState Evaluate()
     {
-        Transform target = (Transform)GetData(GuardBT.targetStr);
+        Transform target = (Transform)GetData(GuardBT.settings.targetStr);
 
         //since this node is only called once the previous node has returned a succes
         //we can do our attack logic here (preferably in an enemymanager script).
@@ -23,7 +23,7 @@ public class TaskAttackTarget : Node
         if (TestIsDead)
         {
             //if the target is dead, we clear the data and return to patrolling.
-            ClearData(GuardBT.targetStr);
+            ClearData(GuardBT.settings.targetStr);
         }
         // transform.LookAt(target.position);
 
