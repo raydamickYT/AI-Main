@@ -4,13 +4,22 @@ using UnityEngine;
 
 using BehaviourTree;
 using UnityEditor;
+using UnityEngine.AI;
 
 public class TaskHideFromEnemy : Node
 {
     Transform transform;
-    public TaskHideFromEnemy(Transform _transform)
+    private NavMeshAgent nav;
+    private Vector3 randomPos, coverPoint;
+    Transform enemy;
+    private float rangeRandPoint = 6, distToCover = 1;
+    private LayerMask obstructionLayer;
+
+    public TaskHideFromEnemy(Transform _transform, NavMeshAgent _nav)
     {
+        nav = _nav;
         transform = _transform;
+        obstructionLayer = AllyBT.Settings.TreeMask | AllyBT.Settings.EnemyMask | AllyBT.Settings.PlayerMask;
     }
 
 
@@ -20,30 +29,20 @@ public class TaskHideFromEnemy : Node
     /// <returns></returns>
     public override NodeState Evaluate()
     {
-        Transform tree = (Transform)GetData(AllyBT.Settings.TreeStr);
-        Transform enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
-
-        //calc the dir from the enemy
-        Vector3 directionFromEnemyToTree = (tree.position - enemy.position).normalized;
-
-        // calc the pos on the opposite side of the tree
-        // 'distanceFromTree' is how far from the tree you want the AI to stop
-        float distanceFromTree = 1.0f;
-        Vector3 oppositePosition = tree.position + directionFromEnemyToTree * distanceFromTree;
-
-
-        // hier in de toekomst misschien een bool check doen die checkt of de enemy nog aan het aanvallen is.
-        //voor nu gwn code
-        float distanceToOppositePosition = Vector3.Distance(transform.position, oppositePosition);
-        transform.position = Vector3.MoveTowards(transform.position, oppositePosition, AllyBT.speed(distanceToOppositePosition) * Time.deltaTime);
-        if (distanceToOppositePosition < 0.1f)
+        enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
+        Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
+        Debug.DrawLine(enemy.position, coverSpot.position, Color.red, 2);
+        if (coverSpot != null)
         {
-            state = NodeState.SUCCES;
-            return state;
+            Debug.Log("running to spot");
+
+            nav.SetDestination(coverSpot.position);
         }
 
 
+        //else its still looking.
         state = NodeState.RUNNING;
         return state;
     }
+
 }

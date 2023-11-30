@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTree;
 public class CheckEnemyNear : Node
@@ -12,7 +10,6 @@ public class CheckEnemyNear : Node
         transform = _transform;
         enemyLayerMask = _enemyMask;
     }
-
 
     //checks if there is an enemy near and adds its transform to a list for future use.
     public override NodeState Evaluate()
@@ -34,4 +31,6 @@ public class CheckEnemyNear : Node
         state = NodeState.SUCCES;
         return state;
     }
+
+
 }

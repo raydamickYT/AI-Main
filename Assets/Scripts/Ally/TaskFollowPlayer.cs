@@ -3,31 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviourTree;
+using UnityEngine.UI;
+using UnityEngine.AI;
 public class TaskFollowPlayer : Node
 {
     public Transform transform, playerTransform;
+    private NavMeshAgent nav;
 
-    public TaskFollowPlayer(Transform _transform, Transform _playerTransform)
+    public TaskFollowPlayer(Transform _transform, Transform _playerTransform, NavMeshAgent _nav)
     {
+        nav = _nav;
         transform = _transform;
         playerTransform = _playerTransform;
     }
 
     public override NodeState Evaluate()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, playerTransform.position);
-        if (distanceToTarget + 3 <= AllyBT.Settings.SlowDist)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position,
-             AllyBT.speed(distanceToTarget) * Time.deltaTime);
-
-            transform.LookAt(Vector3.forward);
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, AllyBT.Settings.maxSpeed * Time.deltaTime);
-        }
-
+        nav.SetDestination(playerTransform.position);
         state = NodeState.RUNNING;
         return state;
     }

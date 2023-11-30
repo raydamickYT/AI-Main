@@ -8,7 +8,7 @@ namespace BehaviourTree
     /// this node type operates by checking all it's children and stops once it finds a node that returns succes or running.
     /// simalar to a logical OR operation
     /// </summary>
-    public class Selector : Node
+    public class Selector : Composite
     {
         public Selector() : base() { }
         public Selector(List<Node> children) : base(children) { }

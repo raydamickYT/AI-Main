@@ -19,7 +19,7 @@ public class AllySettings : ScriptableObject
     }
 
     [Header("Avoidance & Detection")]
-    public LayerMask EnemyMask, TreeMask;
+    public LayerMask EnemyMask, TreeMask, PlayerMask;
     public float PerceptionRadius = 100f, DangerPerceptionRadius = 10f, StopDist = 2, SlowDist = 5;
     public float AvoidanceRadius = 1;
 
