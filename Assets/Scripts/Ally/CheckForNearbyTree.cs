@@ -27,6 +27,7 @@ public class CheckForNearbyTree : Node
                 if (bestCoverSpot != null)
                 {
                     Parent.Parent.SetData(AllyBT.Settings.TreeStr, bestCoverSpot);
+
                     // nav.SetDestination(bestCoverSpot.position);
                     state = NodeState.SUCCES;
                     return state;
@@ -37,6 +38,7 @@ public class CheckForNearbyTree : Node
                     state = NodeState.FAILURE;
                     return state;
                 }
+
             }
         }
 
@@ -51,14 +53,20 @@ public class CheckForNearbyTree : Node
         foreach (Collider potentialCover in colliders)
         {
             Vector3 coverPosition = potentialCover.transform.position;
-            float coverRating = RateCoverSpot(coverPosition);
-            Debug.Log(coverRating);
+
+            Vector3 directionFromCoverToAI = (transform.position - coverPosition).normalized;
+            float offsetDistance = -5f; // Half a meter offset; adjust as needed
+            Vector3 raycastStartPosition = coverPosition + directionFromCoverToAI * offsetDistance;
+            float coverRating = RateCoverSpot(raycastStartPosition);
+            GameObject coverPositionObject = new GameObject("raycastStartPosition");
+            coverPositionObject.transform.position = raycastStartPosition;
 
             if (coverRating > bestCoverRating)
             {
-                bestCover = potentialCover.transform;
+                bestCover = coverPositionObject.transform;
                 bestCoverRating = coverRating;
             }
+
         }
 
         return bestCover;
@@ -66,9 +74,11 @@ public class CheckForNearbyTree : Node
 
     float RateCoverSpot(Vector3 coverPosition)
     {
-        // A simple rating method - can be more complex based on game requirements
         float rating = 0f;
         Transform enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
+
+        // Offset the start position of the raycast slightly towards the AI
+            Debug.DrawLine(enemy.position, coverPosition, Color.red, 5);
 
         // Check if this cover spot effectively blocks the line of sight from the enemy
         if (Physics.Linecast(enemy.position, coverPosition, obstructionLayer))
@@ -77,8 +87,7 @@ public class CheckForNearbyTree : Node
             rating += 1f;
         }
 
-        // Additional rating criteria can be added here
-
         return rating;
     }
+
 }

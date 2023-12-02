@@ -31,7 +31,6 @@ public class TaskHideFromEnemy : Node
     {
         enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
         Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
-        Debug.DrawLine(enemy.position, coverSpot.position, Color.red, 2);
         if (coverSpot != null)
         {
             Debug.Log("running to spot");
