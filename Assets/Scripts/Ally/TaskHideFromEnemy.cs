@@ -10,9 +10,7 @@ public class TaskHideFromEnemy : Node
 {
     Transform transform;
     private NavMeshAgent nav;
-    private Vector3 randomPos, coverPoint;
     Transform enemy;
-    private float rangeRandPoint = 6, distToCover = 1;
     private LayerMask obstructionLayer;
 
     public TaskHideFromEnemy(Transform _transform, NavMeshAgent _nav)
@@ -33,14 +31,21 @@ public class TaskHideFromEnemy : Node
         Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
         if (coverSpot != null)
         {
-            Debug.Log("running to spot");
 
             nav.SetDestination(coverSpot.position);
+            float dist = Vector3.Distance(coverSpot.position, transform.position);
+            if (dist <= 3)
+            {
+                Debug.Log("end reached");
+                state = NodeState.SUCCES;
+                return state;
+            }
+            state = NodeState.RUNNING;
+            return state;
         }
 
-
         //else its still looking.
-        state = NodeState.RUNNING;
+        state = NodeState.FAILURE;
         return state;
     }
 

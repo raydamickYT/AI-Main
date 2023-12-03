@@ -1,5 +1,6 @@
 using BehaviourTree;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine.AI;
 
 public class AllyBT : Tree
@@ -14,7 +15,7 @@ public class AllyBT : Tree
     public static float speed(float dist)
     {
         float proportionalDistance = (dist - Settings.StopDist) / (Settings.SlowDist - Settings.StopDist);
-        float speed = UnityEngine.Mathf.Lerp(0, Settings.maxSpeed, proportionalDistance);
+        float speed = UnityEngine.Mathf.Lerp(0, Settings.MaxSpeed, proportionalDistance);
 
         return speed;
     }
@@ -31,6 +32,10 @@ public class AllyBT : Tree
     protected override Node SetupTree()
     {
         Node Root = new Selector(new List<Node>{
+            new Sequence(new List<Node>{
+                new CheckHidingSpotReached(transform),
+                new TaskThrowProjectile(transform),
+            }),
             new Sequence(new List<Node>{
                 new CheckEnemyNear(transform, Settings.EnemyMask),
                 new CheckForNearbyTree(transform),
@@ -51,10 +56,11 @@ public class AllyBT : Tree
             Settings = _allySettings;
         }
         Nav = GetComponent<NavMeshAgent>();
-        if(Nav == null){
+        if (Nav == null)
+        {
             UnityEngine.Debug.LogWarning("no navmesh on the AllyAI");
         }
-        Nav.speed = Settings.maxSpeed;
+        Nav.speed = Settings.MaxSpeed;
         Nav.stoppingDistance = Settings.SlowDist;
     }
 }

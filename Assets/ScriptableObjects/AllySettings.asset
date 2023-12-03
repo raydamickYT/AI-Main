@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5f865ce6e934546aac1fc359640025, type: 3}
   m_Name: AllySettings
   m_EditorClassIdentifier: 
-  minSpeed: 2
-  maxSpeed: 5
-  PlayerTargetStr: playerTarget
-  TreeStr: TreeStr
+  MaxSpeed: 5
   EnemyMask:
     serializedVersion: 2
     m_Bits: 128
@@ -30,3 +27,7 @@ MonoBehaviour:
   StopDist: 2
   SlowDist: 4
   AvoidanceRadius: 1
+  trajectoryPredictor: {fileID: 0}
+  ThrowForce: 20
+  ObjectToThrow: {fileID: 1014940507419718282, guid: 7738eea2ed140b24bb417700365ca950,
+    type: 3}
