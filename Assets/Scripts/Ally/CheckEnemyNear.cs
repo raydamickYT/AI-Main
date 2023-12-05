@@ -14,10 +14,20 @@ public class CheckEnemyNear : Node
     //checks if there is an enemy near and adds its transform to a list for future use.
     public override NodeState Evaluate()
     {
+        Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
         object t = GetData(AllyBT.Settings.PlayerTargetStr);
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, AllyBT.Settings.DangerPerceptionRadius, enemyLayerMask);
+            float dist = Vector3.Distance(transform.position, positionOfAgent1);
+            if (dist < AllyBT.Settings.PerceptionRadius)
+            {
+                Debug.Log("enemy near");
+                // Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, positionOfAgent1);
+                
+                // state = NodeState.SUCCES;
+                // return state;
+            }
             if (colliders.Length > 0)
             {
                 Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, colliders[0].transform);

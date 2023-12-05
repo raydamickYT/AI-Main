@@ -4,30 +4,40 @@ using UnityEngine;
 public class CheckEnemyInAttackRange : Node
 {
     private Transform transform;
+    private GuardBT guard;
 
-    public CheckEnemyInAttackRange(Transform _transform)
+    public CheckEnemyInAttackRange(Transform _transform, GuardBT _guard)
     {
         transform = _transform;
+        guard = _guard;
     }
 
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.settings.targetStr);
+        object t = GetData(GuardBT.settings.TargetStr);
         if (t == null)
         {
-            //if no collider was found, the node has failed
+            // No target found, so we cannot be in attack range
+            Debug.Log("Target not found, failing attack range check");
             state = NodeState.FAILURE;
             return state;
         }
-        //no need for a 2nd collision detection, because we already have the target pos in the dictionary, since it's been found (not null)
-        Transform target = (Transform)t;
-        if (Vector3.Distance(transform.position, target.position) <= GuardBT.settings.AtkRange)
-        {
-            state = NodeState.SUCCES;
-            return state;
-        }
 
-        state = NodeState.FAILURE;
+        Transform target = (Transform)t;
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+        if (distanceToTarget <= GuardBT.settings.AtkRange)
+        {
+            // Target is within attack range
+            // Debug.Log("Target within attack range");
+            state = NodeState.SUCCES;
+        }
+        else
+        {
+            // Target is not in attack range yet
+            // Debug.Log("Target not in attack range, still running");
+            state = NodeState.FAILURE;
+        }
         return state;
     }
 }

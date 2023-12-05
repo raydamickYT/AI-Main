@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: AllySettings
   m_EditorClassIdentifier: 
   MaxSpeed: 5
+  thrownObject: thrownObject
+  playerTarget: playerTarget
+  treeStr: TreeStr
   EnemyMask:
     serializedVersion: 2
     m_Bits: 128
@@ -27,7 +30,12 @@ MonoBehaviour:
   StopDist: 2
   SlowDist: 4
   AvoidanceRadius: 1
-  trajectoryPredictor: {fileID: 0}
-  ThrowForce: 20
-  ObjectToThrow: {fileID: 1014940507419718282, guid: 7738eea2ed140b24bb417700365ca950,
+  ThrowForce: 26.2
+  ObjectToThrow: {fileID: 7365662374667710406, guid: 7738eea2ed140b24bb417700365ca950,
     type: 3}
+  projectileProperties:
+    Direction: {x: 0, y: 0, z: 0}
+    InitialPos: {x: 0, y: 0, z: 0}
+    InitialSpeed: 0
+    Mass: 0
+    Drag: 0

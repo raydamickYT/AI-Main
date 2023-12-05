@@ -5,9 +5,11 @@ using UnityEngine;
 
 using BehaviourTree;
 using System.Transactions;
+using UnityEngine.AI;
 public class TaskPatrol : Node
 {
     private Transform transform;
+    private NavMeshAgent nav;
     private Transform[] wayPoints;
 
     private int currentWayPointIndex = 0;
@@ -15,10 +17,11 @@ public class TaskPatrol : Node
     private float waitTime = 1f; //in seconds
     private float waitCounter = 0f;
     private bool waiting = false;
-    public TaskPatrol(Transform _transform, Transform[] _wayPoints)
+    public TaskPatrol(Transform _transform, Transform[] _wayPoints, NavMeshAgent _nav)
     {
         transform = _transform;
         wayPoints = _wayPoints;
+        nav = _nav;
     }
     public override NodeState Evaluate()
     {
@@ -34,8 +37,7 @@ public class TaskPatrol : Node
         {
             Transform wp = wayPoints[currentWayPointIndex];
             float distanceToWayPoint = Vector3.Distance(transform.position, wp.position);
-
-            if (distanceToWayPoint < 0.5f)
+            if (distanceToWayPoint < 1.3f)
             {
                 // transform.position = wp.position;
                 waitCounter = 0;
@@ -45,8 +47,8 @@ public class TaskPatrol : Node
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, wp.position, GuardBT.settings.patrollingSpeed(distanceToWayPoint) * Time.deltaTime);
-                transform.LookAt(wp.position);
+                nav.SetDestination(wp.transform.position);
+                // transform.LookAt(wp.position);
             }
 
         }

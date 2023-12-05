@@ -5,10 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemySettings", menuName = "Enemy/Settings")]
 public class EnemySettings : ScriptableObject
 {
+    [Header("Speed & String")]
     // Settings
     public float minSpeed = 1;
     public float maxSpeed = 3;
-    public string targetStr = "enemyTarget";
+    [SerializeField]
+    private string weaponStr = "WeaponsStr";
+    public string WeaponsStr
+    {
+        get { return weaponStr; }
+        private set { weaponStr = value; }
+    }
+    [SerializeField]
+    private string targetStr = "enemyTarget";
+    public string TargetStr
+    {
+        get { return targetStr; }
+        private set { targetStr = value; }
+    }
     public float patrollingSpeed(float dist)
     {
         float proportionalDistance = dist / SlowDist;
@@ -23,9 +37,9 @@ public class EnemySettings : ScriptableObject
 
         return speed;
     }
-
+    [Header("Layer Masks")]
+    public LayerMask TargetMask, WeaponMask;
     [Header("Avoidance & Detection")]
-    public LayerMask TargetMask;
     public float PerceptionRadius = 6f, AtkRange = 2f, StopDist = 2, SlowDist = 5;
     public float AvoidanceRadius = 1;
 

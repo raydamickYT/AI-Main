@@ -34,7 +34,7 @@ public class CheckForNearbyTree : Node
                 }
                 else
                 {
-                    Debug.Log("No effective cover found");
+                    // Debug.Log("No effective cover found");
                     state = NodeState.FAILURE;
                     return state;
                 }

@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpeed: 0
   maxSpeed: 3
+  weaponStr: WeaponsStr
   targetStr: enemyTarget
   TargetMask:
     serializedVersion: 2
     m_Bits: 64
+  WeaponMask:
+    serializedVersion: 2
+    m_Bits: 1024
   PerceptionRadius: 6
   AtkRange: 2
   StopDist: 1
