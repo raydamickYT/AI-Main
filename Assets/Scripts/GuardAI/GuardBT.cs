@@ -50,6 +50,9 @@ public class GuardBT : Tree
 
     protected override void Initialization()
     {
+        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
+
+        GlobalBlackboard.Instance.SetVariable(str, false);
         if (_settings == null)
         {
             UnityEngine.Debug.LogWarning("EnemySettings.cs is not assigned in GuardBT");

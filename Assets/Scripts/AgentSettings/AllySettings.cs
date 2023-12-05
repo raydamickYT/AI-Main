@@ -9,11 +9,11 @@ public class AllySettings : ScriptableObject
     // Settings
     public float MaxSpeed = 5;
     [SerializeField]
-    private string thrownObject = "thrownObject";
-    public string ThrownObject
+    private string thrownObjectStr = "thrownObject";
+    public string ThrownObjectStr
     {
-        get { return thrownObject; }
-        private set { thrownObject = value; }
+        get { return thrownObjectStr; }
+        private set { thrownObjectStr = value; }
     }
     [SerializeField]
     private string playerTarget = "playerTarget";

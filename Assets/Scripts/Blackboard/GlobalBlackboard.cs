@@ -4,6 +4,7 @@ using UnityEngine;
 public class GlobalBlackboard
 {
     private static GlobalBlackboard _instance;
+    public string AttackingPlayerStr = "AttackingPlayer";
     private Dictionary<string, object> dictionary = new Dictionary<string, object>();
     private Dictionary<string, Vector3> aiPositions = new Dictionary<string, Vector3>();
 
@@ -60,7 +61,6 @@ public class GlobalBlackboard
         }
         return default(T);
     }
-
     public void SetVariable<T>(string name, T variable)
     {
         dictionary[name] = variable;

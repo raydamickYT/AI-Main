@@ -27,23 +27,28 @@ public class TaskThrowProjectile : Node
     /// <returns></returns>
     public override NodeState Evaluate()
     {
-        object t = GetData(settings.ThrownObject);
+        object t = GetData(settings.ThrownObjectStr);
+        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
         // Transform enemyObject = (Transform)GetData(settings.PlayerTargetStr);
         Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
-        if (t == null)
+        bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
+        if (isAllowedToThrow && t == null)
         {
+            Debug.Log(isAllowedToThrow);
             if (startPos == null) startPos = transform;
+            
             GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 80);
+            
             if (ThrownObject != null)
             {
                 Debug.Log(t);
-                SetData(settings.ThrownObject, ThrownObject.transform);
+                SetData(settings.ThrownObjectStr, ThrownObject.transform);
                 state = NodeState.SUCCES;
                 return state;
             }
 
         }
-        state = NodeState.SUCCES;
+        state = NodeState.RUNNING;
         return state;
     }
 }

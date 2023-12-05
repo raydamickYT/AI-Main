@@ -15,7 +15,18 @@ public class TaskAttackTarget : Node
 
     public override NodeState Evaluate()
     {
+        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
         Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
+
+        float dist = Vector3.Distance(transform.position, target.position);
+        Debug.Log(dist);
+        if (dist <= 2)
+        {
+            Debug.Log("attacking");
+            //if this is true, the enemy is attacking.
+            GlobalBlackboard.Instance.SetVariable(str, true);
+            Debug.Log(GlobalBlackboard.Instance.GetVariable<bool>("attackingPlayer"));
+        }
 
         //since this node is only called once the previous node has returned a succes
         //we can do our attack logic here (preferably in an enemymanager script).
