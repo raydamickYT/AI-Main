@@ -21,7 +21,7 @@ public class CheckHidingSpotReached : Node
                 state = NodeState.SUCCES;
                 return state;
             }
-            state = NodeState.FAILURE;
+            state = NodeState.RUNNING;
             return state;
         }
         state = NodeState.FAILURE;

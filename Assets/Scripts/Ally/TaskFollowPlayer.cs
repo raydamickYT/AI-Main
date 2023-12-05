@@ -19,6 +19,7 @@ public class TaskFollowPlayer : Node
 
     public override NodeState Evaluate()
     {
+        Debug.Log("running");
         nav.SetDestination(playerTransform.position);
         state = NodeState.RUNNING;
         return state;

@@ -20,12 +20,10 @@ public class TaskAttackTarget : Node
 
         float dist = Vector3.Distance(transform.position, target.position);
         Debug.Log(dist);
-        if (dist <= 2)
+        if (dist <= GuardBT.settings.StopDist + 0.2) //small offset because the enemy ai stops just shy of 1 from the player
         {
-            Debug.Log("attacking");
             //if this is true, the enemy is attacking.
             GlobalBlackboard.Instance.SetVariable(str, true);
-            Debug.Log(GlobalBlackboard.Instance.GetVariable<bool>("attackingPlayer"));
         }
 
         //since this node is only called once the previous node has returned a succes

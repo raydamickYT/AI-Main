@@ -35,7 +35,7 @@ public class TaskHideFromEnemy : Node
             float dist = Vector3.Distance(coverSpot.position, transform.position);
             if (dist <= 0.1)
             {
-                Debug.Log("end reached");
+                // Debug.Log("end reached");
                 state = NodeState.SUCCES;
                 return state;
             }

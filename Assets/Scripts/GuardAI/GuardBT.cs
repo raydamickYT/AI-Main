@@ -61,5 +61,14 @@ public class GuardBT : Tree
         {
             settings = _settings;
         }
+        if (nav == null)
+        {
+            UnityEngine.Debug.LogWarning("geen navmesh op de guard");
+        }
+        else
+        {
+            nav.speed = settings.maxSpeed;
+            nav.stoppingDistance = settings.StopDist;
+        }
     }
 }

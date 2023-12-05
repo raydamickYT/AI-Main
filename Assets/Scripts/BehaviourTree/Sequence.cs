@@ -32,7 +32,8 @@ namespace BehaviourTree
                         continue;
                     case NodeState.RUNNING:
                         anyChildIsRunning = true;
-                        continue;
+                        state = NodeState.RUNNING;
+                        return state;
                     default:
                         state = NodeState.SUCCES;
                         return state;
@@ -40,6 +41,16 @@ namespace BehaviourTree
             }
             state = anyChildIsRunning ? NodeState.RUNNING : NodeState.SUCCES;
             return state;
+        }
+
+        protected override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        protected override void OnExit()
+        {
+            base.OnExit();
         }
     }
 }

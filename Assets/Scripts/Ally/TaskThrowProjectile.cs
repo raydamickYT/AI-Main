@@ -10,6 +10,9 @@ public class TaskThrowProjectile : Node
 {
     private Transform transform, startPos;
     private AllySettings settings;
+    private bool waiting = false;
+    private float waitCounter = 0;
+    private float waitTime = 1;
 
     public TaskThrowProjectile(Transform _transform)
     {
@@ -25,30 +28,54 @@ public class TaskThrowProjectile : Node
     /// die value die iedereen kan lezen kan bereikt worden met een blackboard.
     /// </summary>
     /// <returns></returns>
-    public override NodeState Evaluate()
-    {
-        object t = GetData(settings.ThrownObjectStr);
-        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
-        // Transform enemyObject = (Transform)GetData(settings.PlayerTargetStr);
-        Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
-        bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
-        if (isAllowedToThrow && t == null)
-        {
-            Debug.Log(isAllowedToThrow);
-            if (startPos == null) startPos = transform;
-            
-            GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 80);
-            
-            if (ThrownObject != null)
-            {
-                Debug.Log(t);
-                SetData(settings.ThrownObjectStr, ThrownObject.transform);
-                state = NodeState.SUCCES;
-                return state;
-            }
+public override NodeState Evaluate()
+{
+    string str = GlobalBlackboard.Instance.AttackingPlayerStr;
+    bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
 
-        }
-        state = NodeState.RUNNING;
-        return state;
+    // Start the waiting timer if allowed to throw and not already waiting
+    if (isAllowedToThrow && !waiting)
+    {
+        waiting = true;
+        waitCounter = 0;
     }
+
+    // While waiting, increment the counter
+    if (waiting)
+    {
+        waitCounter += Time.deltaTime;
+        if (waitCounter < waitTime)
+        {
+            // Still waiting, so return RUNNING
+            state = NodeState.RUNNING;
+            return state;
+        }
+
+        // Wait time completed, proceed to throw the projectile
+        waiting = false;
+    }
+
+    // Logic to throw projectile
+    object t = GetData(settings.ThrownObjectStr);
+    Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
+
+    if (t == null)
+    {
+        if (startPos == null) startPos = transform;
+
+        GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 85);
+
+        if (ThrownObject != null)
+        {
+            SetData(settings.ThrownObjectStr, ThrownObject.transform);
+            Debug.Log("thrown");
+            state = NodeState.SUCCES;
+            return state;
+        }
+    }
+
+    state = NodeState.RUNNING;
+    return state;
+}
+
 }
