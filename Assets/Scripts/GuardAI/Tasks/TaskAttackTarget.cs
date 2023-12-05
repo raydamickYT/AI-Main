@@ -19,7 +19,7 @@ public class TaskAttackTarget : Node
 
         //since this node is only called once the previous node has returned a succes
         //we can do our attack logic here (preferably in an enemymanager script).
-        Debug.Log("attacking");
+        // Debug.Log("attacking");
         if (TestIsDead)
         {
             //if the target is dead, we clear the data and return to patrolling.

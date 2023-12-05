@@ -53,12 +53,12 @@ public class AllySettings : ScriptableObject
     [Header("Projectile Properties")]
     public ProjectileProperties projectileProperties;
 
-public GameObject ThrowObject(Transform startPos, Transform targetPos, float maxThrowAngle = 45.0f)
+public GameObject ThrowObject(Transform startPos, Vector3 targetPos, float maxThrowAngle = 45.0f)
 {
     GameObject thrownObject = Instantiate(ObjectToThrow, startPos.position, Quaternion.identity);
     Rigidbody rb = thrownObject.GetComponent<Rigidbody>();
 
-    Vector3 toTarget = targetPos.position - startPos.position;
+    Vector3 toTarget = targetPos - startPos.position;
 
     // Calculate the vertical and horizontal distances
     float yOffset = toTarget.y;

@@ -27,14 +27,13 @@ public class TaskHideFromEnemy : Node
     /// <returns></returns>
     public override NodeState Evaluate()
     {
-        enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
         Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
         if (coverSpot != null)
         {
 
             nav.SetDestination(coverSpot.position);
             float dist = Vector3.Distance(coverSpot.position, transform.position);
-            if (dist <= 3)
+            if (dist <= 0.1)
             {
                 Debug.Log("end reached");
                 state = NodeState.SUCCES;

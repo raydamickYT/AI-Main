@@ -14,31 +14,31 @@ public class CheckEnemyNear : Node
     //checks if there is an enemy near and adds its transform to a list for future use.
     public override NodeState Evaluate()
     {
-        Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
-        object t = GetData(AllyBT.Settings.PlayerTargetStr);
-        if (t == null)
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, AllyBT.Settings.DangerPerceptionRadius, enemyLayerMask);
-            float dist = Vector3.Distance(transform.position, positionOfAgent1);
-            if (dist < AllyBT.Settings.PerceptionRadius)
-            {
-                Debug.Log("enemy near");
-                // Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, positionOfAgent1);
-                
-                // state = NodeState.SUCCES;
-                // return state;
-            }
-            if (colliders.Length > 0)
-            {
-                Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, colliders[0].transform);
+        Vector3 enemyPosition = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
 
+        // Check if enemy position is valid (not Vector3.zero, or use a different method to validate)
+        if (enemyPosition != Vector3.zero)
+        {
+            float dist = Vector3.Distance(transform.position, enemyPosition);
+
+            if (dist < AllyBT.Settings.DangerPerceptionRadius)
+            {
+                // Enemy is within perception radius
+                Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, enemyPosition);
                 state = NodeState.SUCCES;
-                return state;
             }
-            state = NodeState.FAILURE;
-            return state;
+            else
+            {
+                // Enemy is outside perception radius
+                state = NodeState.FAILURE;
+            }
         }
-        state = NodeState.SUCCES;
+        else
+        {
+            // No valid enemy position available
+            state = NodeState.FAILURE;
+        }
+
         return state;
     }
 

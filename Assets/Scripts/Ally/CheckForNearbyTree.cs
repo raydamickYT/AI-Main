@@ -19,6 +19,7 @@ public class CheckForNearbyTree : Node
         object t = (Transform)GetData(AllyBT.Settings.TreeStr);
         if (t == null)
         {
+
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, AllyBT.Settings.PerceptionRadius, AllyBT.Settings.TreeMask);
             if (hitColliders.Length > 0)
             {
@@ -55,7 +56,7 @@ public class CheckForNearbyTree : Node
             Vector3 coverPosition = potentialCover.transform.position;
 
             Vector3 directionFromCoverToAI = (transform.position - coverPosition).normalized;
-            float offsetDistance = -5f; // Half a meter offset; adjust as needed
+            float offsetDistance = -1f; // offset; adjust as needed
             Vector3 raycastStartPosition = coverPosition + directionFromCoverToAI * offsetDistance;
             float coverRating = RateCoverSpot(raycastStartPosition);
             GameObject coverPositionObject = new GameObject("raycastStartPosition");
@@ -75,13 +76,14 @@ public class CheckForNearbyTree : Node
     float RateCoverSpot(Vector3 coverPosition)
     {
         float rating = 0f;
-        Transform enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
+        // Transform enemy = (Transform)GetData(AllyBT.Settings.PlayerTargetStr);
+        Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
 
         // Offset the start position of the raycast slightly towards the AI
-            Debug.DrawLine(enemy.position, coverPosition, Color.red, 5);
+        Debug.DrawLine(positionOfAgent1, coverPosition, Color.red, 5);
 
         // Check if this cover spot effectively blocks the line of sight from the enemy
-        if (Physics.Linecast(enemy.position, coverPosition, obstructionLayer))
+        if (Physics.Linecast(positionOfAgent1, coverPosition, obstructionLayer))
         {
             // Increase rating if line of sight is blocked
             rating += 1f;
