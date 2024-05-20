@@ -41,6 +41,10 @@ public class AllyBT : Tree
                 new CheckForNearbyTree(transform),
                 new TaskHideFromEnemy(transform,Nav),
             }),
+            // new Sequence(new List<Node>{
+            // new CheckEnemyChasing(), // Controleer of de vijand de speler nog steeds volgt voordat de ally de speler volgt
+            // new TaskFollowPlayer(transform, PlayerTransform, Nav),
+            // }),
             new TaskFollowPlayer(transform, PlayerTransform, Nav),
         });
         return Root;

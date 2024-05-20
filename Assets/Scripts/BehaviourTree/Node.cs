@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 
 namespace BehaviourTree
@@ -31,10 +32,9 @@ namespace BehaviourTree
         //         attach(Child);
         //     }
         // }
- 
+
         protected virtual void OnEnter() { }
-        protected
-         virtual void OnExit() { }
+        protected virtual void OnExit() { }
         public virtual NodeState Evaluate() => NodeState.FAILURE;
 
         public void SetData(string key, object value)
@@ -54,7 +54,6 @@ namespace BehaviourTree
             object value;
             if (dataContext.TryGetValue(key, out value))
                 return value;
-
             //if the key isn't found, this checks every node until it finds the key we were looking or it reaches a node without parent (root of the tree).
             Node node = Parent;
             while (node != null)

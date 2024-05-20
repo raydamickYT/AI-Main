@@ -19,6 +19,10 @@ public class TaskGoToTarget : Node
     public override NodeState Evaluate()
     {
         Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
+        if (target == null)
+        {
+            Debug.LogError($"Target not found using key {GuardBT.settings.TargetStr}. Failing attack range check.");
+        }
         float dist = Vector3.Distance(transform.position, target.position);
         if (guard.EquippedItems.Count == 0)
         {
@@ -36,6 +40,8 @@ public class TaskGoToTarget : Node
         {
             ClearData(GuardBT.settings.TargetStr);
             Debug.Log("out of range");
+            state = NodeState.FAILURE;
+            return state;
         }
         state = NodeState.RUNNING;
         return state;

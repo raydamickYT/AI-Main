@@ -17,10 +17,14 @@ public class CheckEnemyInAttackRange : Node
         object t = GetData(GuardBT.settings.TargetStr);
         if (t == null)
         {
+            Debug.LogError($"Target not found using key {GuardBT.settings.TargetStr}. Failing attack range check.");
             // No target found, so we cannot be in attack range
-            Debug.Log("Target not found, failing attack range check");
             state = NodeState.FAILURE;
             return state;
+        }
+        else
+        {
+            Debug.Log($"Target found using key {GuardBT.settings.TargetStr}.");
         }
 
         Transform target = (Transform)t;
