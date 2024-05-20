@@ -10,6 +10,18 @@ public class CheckEnemyInFOVRange : Node
         transform = _transform;
     }
 
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+        GlobalBlackboard.Instance.SetVariable(str, false);
+    }
+    protected override void OnExit()
+    {
+        base.OnExit();
+        var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+        GlobalBlackboard.Instance.SetVariable(str, true); //als we deze node verlaten zijn we altijd aan het chasen.
+    }
     public override NodeState Evaluate()
     {
         object t = GetData(GuardBT.settings.TargetStr);
