@@ -1,14 +1,13 @@
-using System.Collections.Concurrent;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using BehaviourTree;
 using UnityEngine;
-using UnityEngine.Animations;
-
 
 public class TaskThrowProjectile : Node
 {
-    private Transform transform, startPos;
+    private Transform transform;
+    private Transform startPos;
     private AllySettings settings;
     private bool waiting = false;
     private float waitCounter = 0;
@@ -20,62 +19,73 @@ public class TaskThrowProjectile : Node
         settings = AllyBT.Settings;
     }
 
-
-    /// <summary>
-    /// dit moet nog aangepast worden. de enemy schiet nu correct de projectile, maar de enemypos is outdated. 
-    /// ik denk dat ik bij de enemy een state toegevoegd gaat worden die aangeeft dat de enemy aan aan het vallen is. 
-    /// als dat waar is dan checkt de ally nog een keer de pos van de enemy en schiet hij de projectile.
-    /// die value die iedereen kan lezen kan bereikt worden met een blackboard.
-    /// </summary>
-    /// <returns></returns>
-public override NodeState Evaluate()
-{
-    string str = GlobalBlackboard.Instance.AttackingPlayerStr;
-    bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
-
-    // Start the waiting timer if allowed to throw and not already waiting
-    if (isAllowedToThrow && !waiting)
+    public override NodeState Evaluate()
     {
-        waiting = true;
-        waitCounter = 0;
-    }
+        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
+        bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
 
-    // While waiting, increment the counter
-    if (waiting)
-    {
-        waitCounter += Time.deltaTime;
-        if (waitCounter < waitTime)
+        // Start the waiting timer if allowed to throw and not already waiting
+        if (isAllowedToThrow && !waiting)
         {
-            // Still waiting, so return RUNNING
-            state = NodeState.RUNNING;
-            return state;
+            waiting = true;
+            waitCounter = 0;
         }
 
-        // Wait time completed, proceed to throw the projectile
+        // While waiting, increment the counter
+        if (waiting)
+        {
+            waitCounter += Time.deltaTime;
+            if (waitCounter < waitTime)
+            {
+                // Still waiting, so return RUNNING
+                state = NodeState.RUNNING;
+                return state;
+            }
+
+            // Wait time completed, proceed to throw the projectile
+            waiting = false;
+        }
+
+        // Logic to throw projectile
+        object t = GetData(settings.ThrownObjectStr);
+        Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
+
+        if (t == null)
+        {
+            if (startPos == null) startPos = transform;
+
+            GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 85);
+
+            if (ThrownObject != null)
+            {
+                SetData(settings.ThrownObjectStr, ThrownObject.transform);
+                Debug.Log("Projectile thrown");
+                state = NodeState.SUCCES;
+                return state;
+            }
+            else
+            {
+                Debug.LogError("Failed to throw projectile");
+                state = NodeState.FAILURE;
+                return state;
+            }
+        }
+
+        state = NodeState.FAILURE;
+        return state;
+    }
+
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        // Reset waiting state on enter
         waiting = false;
     }
 
-    // Logic to throw projectile
-    object t = GetData(settings.ThrownObjectStr);
-    Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
-
-    if (t == null)
+    protected override void OnExit()
     {
-        if (startPos == null) startPos = transform;
-
-        GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 85);
-
-        if (ThrownObject != null)
-        {
-            SetData(settings.ThrownObjectStr, ThrownObject.transform);
-            Debug.Log("thrown");
-            state = NodeState.SUCCES;
-            return state;
-        }
+        base.OnExit();
+        // Reset waiting state on exit
+        waiting = false;
     }
-
-    state = NodeState.RUNNING;
-    return state;
-}
-
 }
