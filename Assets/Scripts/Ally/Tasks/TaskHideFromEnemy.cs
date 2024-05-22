@@ -20,6 +20,12 @@ public class TaskHideFromEnemy : Node
         obstructionLayer = AllyBT.Settings.TreeMask | AllyBT.Settings.EnemyMask | AllyBT.Settings.PlayerMask;
     }
 
+    public override void OnEnter()
+    {
+        GlobalBlackboard.Instance.SetVariable("ShouldHide", true);
+        base.OnEnter();
+    }
+
 
     /// <summary>
     /// this script will have the ally move towards the tree and find a face of the tree which is facing furthest away from the enemy.

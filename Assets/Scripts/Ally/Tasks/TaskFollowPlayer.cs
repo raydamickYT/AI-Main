@@ -10,6 +10,12 @@ public class TaskFollowPlayer : Node
     public Transform transform, playerTransform;
     private NavMeshAgent nav;
 
+    public override void OnEnter()
+    {
+        Debug.LogWarning("following player");
+        base.OnEnter();
+    }
+
     public TaskFollowPlayer(Transform _transform, Transform _playerTransform, NavMeshAgent _nav)
     {
         nav = _nav;

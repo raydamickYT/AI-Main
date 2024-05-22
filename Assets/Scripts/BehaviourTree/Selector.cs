@@ -5,8 +5,8 @@ using UnityEngine;
 namespace BehaviourTree
 {
     /// <summary>
-    /// this node type operates by checking all it's children and stops once it finds a node that returns succes or running.
-    /// simalar to a logical OR operation
+    /// This node type operates by checking all its children and stops once it finds a node that returns success or running.
+    /// Similar to a logical OR operation.
     /// </summary>
     public class Selector : Composite
     {
@@ -15,25 +15,56 @@ namespace BehaviourTree
 
         public override NodeState Evaluate()
         {
+            if (!wasEntered)
+            {
+                OnEnter();
+                wasEntered = true;
+            }
+
             foreach (Node node in Children)
             {
-                switch (node.Evaluate())
+                if (!node.wasEntered)
+                {
+                    node.OnEnter();
+                    node.wasEntered = true;
+                }
+
+                NodeState result = node.Evaluate();
+                switch (result)
                 {
                     case NodeState.FAILURE:
+                        node.OnExit();
+                        node.wasEntered = false;
                         continue;
                     case NodeState.SUCCES:
+                        node.OnExit();
+                        node.wasEntered = false;
                         state = NodeState.SUCCES;
+                        OnExit();
+                        wasEntered = false;
                         return state;
                     case NodeState.RUNNING:
                         state = NodeState.RUNNING;
                         return state;
-                    default:
-                        continue;
                 }
             }
+
             state = NodeState.FAILURE;
+            OnExit();
+            wasEntered = false;
             return state;
         }
 
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            Debug.Log("Entering Selector");
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            Debug.Log("Exiting Selector");
+        }
     }
 }

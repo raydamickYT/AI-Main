@@ -23,10 +23,6 @@ public class CheckEnemyInAttackRange : Node
             state = NodeState.FAILURE;
             return state;
         }
-        else
-        {
-            Debug.Log($"Target found using key {GuardBT.settings.TargetStr}.");
-        }
 
         Transform target = (Transform)t;
         float distanceToTarget = Vector3.Distance(transform.position, target.position);

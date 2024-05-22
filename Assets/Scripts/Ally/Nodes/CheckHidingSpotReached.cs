@@ -8,7 +8,10 @@ public class CheckHidingSpotReached : Node
     {
         transform = _transform;
     }
-
+    public override void OnEnter()
+    {
+        Debug.LogWarning("Checking if I'm near a hiding spot");
+    }
     public override NodeState Evaluate()
     {
         //if the ally is not near the hiding spot this'll return a false
@@ -19,6 +22,7 @@ public class CheckHidingSpotReached : Node
             if (dist < 3)
             {
                 state = NodeState.SUCCES;
+                GlobalBlackboard.Instance.SetVariable("ShouldHide", false);
                 return state;
             }
             state = NodeState.RUNNING;

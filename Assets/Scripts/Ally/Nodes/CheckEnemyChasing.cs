@@ -5,24 +5,27 @@ using UnityEngine;
 
 namespace BehaviourTree
 {
-
-}
-
-public class CheckEnemyChasing : Node
-{
-
-    public override NodeState Evaluate()
+    public class CheckEnemyChasing : Node
     {
-        bool isChasing = GlobalBlackboard.Instance.GetVariable<bool>(GlobalBlackboard.Instance.IsChasingPlayerStr);
-        if (isChasing) //als de enemy niet meer aanvalt dan kan de ally stoppen met hiden (dus dan returned er een succes)
+        public override void OnEnter()
         {
-            return NodeState.FAILURE;
+            base.OnEnter();
+            Debug.LogWarning("Checking if enemy is chasing");
         }
-        else
+        public override NodeState Evaluate()
         {
-            UnityEngine.Debug.Log("Enemy gave up chase");
-            return NodeState.SUCCES;
-        }
+            bool isChasing = GlobalBlackboard.Instance.GetVariable<bool>(GlobalBlackboard.Instance.IsChasingPlayerStr);
+            if (isChasing) //als de enemy niet meer aanvalt dan kan de ally stoppen met hiden (dus dan returned er een succes)
+            {
+                return NodeState.FAILURE;
+            }
+            else
+            {
+                UnityEngine.Debug.Log("Enemy gave up chase");
+                return NodeState.SUCCES;
+            }
 
+        }
     }
 }
+

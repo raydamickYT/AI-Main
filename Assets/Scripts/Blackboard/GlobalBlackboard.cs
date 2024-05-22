@@ -63,7 +63,7 @@ public class GlobalBlackboard
     }
     public void SetVariable<T>(string name, T variable)
     {
-        UnityEngine.Debug.Log(name + variable.ToString());
+        // UnityEngine.Debug.Log(name + variable.ToString());
         dictionary[name] = variable;
     }
 }

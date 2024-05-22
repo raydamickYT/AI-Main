@@ -21,18 +21,36 @@ namespace BehaviourTree
 
         public override NodeState Evaluate()
         {
+            if (!wasEntered)
+            {
+                OnEnter();
+                wasEntered = true;
+            }
             for (int i = currentIndex; i < Children.Count; i++)
             {
                 Node node = Children[i];
+
+                if (!node.wasEntered)
+                {
+                    node.OnEnter();
+                    node.wasEntered = true;
+                }
+
                 NodeState nodeState = node.Evaluate();
 
                 switch (nodeState)
                 {
                     case NodeState.FAILURE:
+                        node.OnExit();
+                        node.wasEntered = false;
                         state = NodeState.FAILURE;
                         currentIndex = 0; // Reset index on failure
+                        OnExit();
+                        wasEntered = false;
                         return state;
                     case NodeState.SUCCES:
+                        node.OnExit();
+                        node.wasEntered = false;
                         continue;
                     case NodeState.RUNNING:
                         currentIndex = i; // Store the current index
@@ -43,16 +61,18 @@ namespace BehaviourTree
 
             state = NodeState.SUCCES;
             currentIndex = 0; // Reset index if all children succeed
+            OnExit();
+            wasEntered = false;
             return state;
         }
 
-        protected override void OnEnter()
+        public override void OnEnter()
         {
             base.OnEnter();
             currentIndex = 0;
         }
 
-        protected override void OnExit()
+        public override void OnExit()
         {
             base.OnExit();
             currentIndex = 0;

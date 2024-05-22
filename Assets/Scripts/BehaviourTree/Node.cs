@@ -33,8 +33,8 @@ namespace BehaviourTree
         //     }
         // }
 
-        protected virtual void OnEnter() { }
-        protected virtual void OnExit() { }
+        public virtual void OnEnter() { }
+        public virtual void OnExit() { }
         public virtual NodeState Evaluate() => NodeState.FAILURE;
 
         public void SetData(string key, object value)

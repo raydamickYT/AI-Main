@@ -10,13 +10,13 @@ public class CheckEnemyInFOVRange : Node
         transform = _transform;
     }
 
-    protected override void OnEnter()
+    public override void OnEnter()
     {
         base.OnEnter();
         var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         GlobalBlackboard.Instance.SetVariable(str, false);
     }
-    protected override void OnExit()
+    public override void OnExit()
     {
         base.OnExit();
         var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
