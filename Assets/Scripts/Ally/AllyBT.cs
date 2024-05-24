@@ -33,11 +33,11 @@ public class AllyBT : Tree
     {
         Node Root = new Selector(new List<Node>{
             new Sequence(new List<Node>{
-                new CheckShouldHide(),
                 new CheckHidingSpotReached(transform),
                 new TaskThrowProjectile(transform),
             }),
             new Sequence(new List<Node>{
+                new CheckShouldHide(),
                 new CheckEnemyNear(transform, Settings.EnemyMask),
                 new CheckForNearbyTree(transform),
                 new TaskHideFromEnemy(transform,Nav),

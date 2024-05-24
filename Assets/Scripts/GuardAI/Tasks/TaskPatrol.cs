@@ -55,4 +55,11 @@ public class TaskPatrol : Node
         state = NodeState.RUNNING;
         return state;
     }
+
+    public override void OnEnter()
+    {
+        // GlobalBlackboard.Instance.SetVariable("ShouldHide", true); //als de enemy begint met zn achtervolging is dit true
+        //we zetten deze var weer op true in: TaskGoToTarget.cs
+        base.OnEnter();
+    }
 }

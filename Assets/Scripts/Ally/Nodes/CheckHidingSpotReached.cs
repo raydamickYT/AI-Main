@@ -22,7 +22,7 @@ public class CheckHidingSpotReached : Node
             if (dist < 3)
             {
                 state = NodeState.SUCCES;
-                GlobalBlackboard.Instance.SetVariable("ShouldHide", false);
+                // GlobalBlackboard.Instance.SetVariable("ShouldHide", false);
                 return state;
             }
             state = NodeState.RUNNING;

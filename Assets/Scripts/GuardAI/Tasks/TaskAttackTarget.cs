@@ -36,13 +36,10 @@ public class TaskAttackTarget : Node
             ClearData(GuardBT.settings.TargetStr);
             return state;
         }
-        else{
+        else
+        {
             state = NodeState.FAILURE;
             return state;
         }
-        // transform.LookAt(target.position);
-
-        state = NodeState.RUNNING;
-        return state;
     }
 }

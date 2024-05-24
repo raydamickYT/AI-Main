@@ -22,7 +22,7 @@ public class TaskHideFromEnemy : Node
 
     public override void OnEnter()
     {
-        GlobalBlackboard.Instance.SetVariable("ShouldHide", true);
+        // GlobalBlackboard.Instance.SetVariable("ShouldHide", true);
         base.OnEnter();
     }
 
