@@ -32,7 +32,13 @@ public class TaskAttackTarget : Node
         if (TestIsDead)
         {
             //if the target is dead, we clear the data and return to patrolling.
+            state = NodeState.SUCCES;
             ClearData(GuardBT.settings.TargetStr);
+            return state;
+        }
+        else{
+            state = NodeState.FAILURE;
+            return state;
         }
         // transform.LookAt(target.position);
 

@@ -39,7 +39,7 @@ public class TaskHideFromEnemy : Node
 
             nav.SetDestination(coverSpot.position);
             float dist = Vector3.Distance(coverSpot.position, transform.position);
-            if (dist <= 0.1)
+            if (dist <= 10)
             {
                 // Debug.Log("end reached");
                 state = NodeState.SUCCES;
@@ -51,6 +51,7 @@ public class TaskHideFromEnemy : Node
 
         //else its still looking.
         state = NodeState.FAILURE;
+        // Debug.Log("State " + state);
         return state;
     }
 

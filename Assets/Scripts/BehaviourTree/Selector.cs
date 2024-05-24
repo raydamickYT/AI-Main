@@ -58,13 +58,11 @@ namespace BehaviourTree
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("Entering Selector");
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            Debug.Log("Exiting Selector");
         }
     }
 }
