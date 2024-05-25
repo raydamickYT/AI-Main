@@ -24,18 +24,16 @@ public class CheckShouldHide : Node
         // Voor dit voorbeeld controleer ik een fictieve variabele "shouldHide".
         string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
-        Debug.LogWarning("should hide: " + shouldHide);
+        // Debug.LogWarning("should hide: " + shouldHide);
 
         if (shouldHide)
         {
             state = NodeState.SUCCES;
-            Debug.Log("state2: " + state);
             return state;
         }
         else
         {
             state = NodeState.FAILURE;
-            Debug.Log("state2: " + state);
             return state;
         }
     }

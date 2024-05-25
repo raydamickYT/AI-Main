@@ -19,8 +19,6 @@ public class CheckEnemyInFOVRange : Node
     public override void OnExit()
     {
         base.OnExit();
-        var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-        GlobalBlackboard.Instance.SetVariable(str, true); //als we deze node verlaten zijn we altijd aan het chasen.
     }
     public override NodeState Evaluate()
     {
@@ -33,6 +31,9 @@ public class CheckEnemyInFOVRange : Node
                 //we store the collider  the root in case we collide with an enemy. 
                 //the root is 2 levels above, thus the parent.parent
                 Parent.Parent.SetData(GuardBT.settings.TargetStr, colliders[0].transform);
+                
+                var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+                GlobalBlackboard.Instance.SetVariable(str, true); //als we deze node verlaten zijn we altijd aan het chasen.
 
                 state = NodeState.SUCCES;
                 return state;
