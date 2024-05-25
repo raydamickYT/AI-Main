@@ -12,7 +12,8 @@ public class CheckShouldHide : Node
         // Debug.LogWarning("was entered" + wasEntered);
     }
 
-    public override void OnExit(){
+    public override void OnExit()
+    {
         base.OnExit();
         // Debug.LogWarning("was exited" + !wasEntered);
     }
@@ -28,11 +29,13 @@ public class CheckShouldHide : Node
         if (shouldHide)
         {
             state = NodeState.SUCCES;
+            Debug.Log("state2: " + state);
             return state;
         }
         else
         {
             state = NodeState.FAILURE;
+            Debug.Log("state2: " + state);
             return state;
         }
     }

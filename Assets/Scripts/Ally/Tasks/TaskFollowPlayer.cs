@@ -28,6 +28,8 @@ public class TaskFollowPlayer : Node
         // Debug.Log("running");
         nav.SetDestination(playerTransform.position);
         state = NodeState.RUNNING;
+        Debug.Log("state: " + state);
         return state;
+
     }
 }
