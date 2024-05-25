@@ -16,7 +16,7 @@ public class CheckEnemyNear : Node
     public override void OnEnter()
     {
         base.OnEnter(); 
-        Debug.LogWarning("CheckenemyNear");
+        // Debug.LogWarning("CheckenemyNear");
     }
     //checks if there is an enemy near and adds its transform to a list for future use.
     public override NodeState Evaluate()

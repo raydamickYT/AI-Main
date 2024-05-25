@@ -53,7 +53,6 @@ namespace BehaviourTree
                         node.wasEntered = false;
                         continue;
                     case NodeState.RUNNING:
-                        // Debug.Log("Node " + i + " is running.");
                         currentIndex = i; // Store the current index
                         state = NodeState.RUNNING;
                         return state;
