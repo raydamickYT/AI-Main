@@ -90,13 +90,18 @@ public class TaskThrowProjectile : Node
         // Reset waiting state on enter
         waiting = false;
         hasThrown = false;
+        Debug.LogWarning("Trowing Object");
+        string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+        bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
+        // Debug.Log("should hide: " + shouldHide);
     }
 
     public override void OnExit()
     {
         base.OnExit();
         // Reset waiting state on exit
+        // Debug.LogWarning("dit is mijn state" + state);
         waiting = false;
-        hasThrown = false; 
+        hasThrown = false;
     }
 }

@@ -8,18 +8,11 @@ public class Projectile : MonoBehaviour
 
     void OnEnable()
     {
+        if (sp == null)
+        {
+            sp = GetComponent<SphereCollider>();
+        }
         StartCoroutine(ActivateCollision());
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator ActivateCollision()

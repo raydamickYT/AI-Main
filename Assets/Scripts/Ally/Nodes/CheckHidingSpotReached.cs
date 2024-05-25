@@ -10,7 +10,7 @@ public class CheckHidingSpotReached : Node
     }
     public override void OnEnter()
     {
-        // Debug.LogWarning("Checking if I'm near a hiding spot");
+        Debug.LogWarning("Checking if I'm near a hiding spot");
     }
     public override NodeState Evaluate()
     {
@@ -28,7 +28,7 @@ public class CheckHidingSpotReached : Node
                 return state;
             }
             state = NodeState.RUNNING;
-            // Debug.Log("state: " + state);
+            Debug.Log("Hiding: " + state);
 
             return state;
         }

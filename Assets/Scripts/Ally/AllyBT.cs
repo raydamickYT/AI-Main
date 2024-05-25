@@ -32,20 +32,19 @@ public class AllyBT : Tree
     protected override Node SetupTree()
     {
         Node Root = new Selector(new List<Node>{
-            new Sequence(new List<Node>{
-                new CheckShouldHide(),
-                new CheckHidingSpotReached(transform),
-                new TaskThrowProjectile(transform),
-            }),
-            new Sequence(new List<Node>{
-                new CheckEnemyNear(transform, Settings.EnemyMask),
-                new CheckForNearbyTree(transform),
-                new TaskHideFromEnemy(transform,Nav),
-            }),
-            new TaskFollowPlayer(transform, PlayerTransform, Nav),
-        });
+        new Sequence(new List<Node>{
+            new CheckShouldHide(), // Controleert of de alliantie zich moet verstoppen
+            new CheckEnemyNear(transform, Settings.EnemyMask),
+            new CheckForNearbyTree(transform), // Zoekt naar een nabijgelegen boom om te verstoppen
+            new TaskHideFromEnemy(transform, Nav), // Beweegt naar de schuilplaats
+            new CheckHidingSpotReached(transform), // Controleert of de schuilplaats is bereikt
+            new TaskThrowProjectile(transform), // Gooit een projectiel na het bereiken van de schuilplaats
+        }),
+        new TaskFollowPlayer(transform, PlayerTransform, Nav), // Volgt de speler als alternatief gedrag
+    });
         return Root;
     }
+
     protected override void Initialization()
     {
         if (_allySettings == null)

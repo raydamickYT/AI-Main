@@ -12,7 +12,7 @@ public class TaskFollowPlayer : Node
 
     public override void OnEnter()
     {
-        // Debug.LogWarning("following player");
+        Debug.LogWarning("following player");
         base.OnEnter();
     }
 
@@ -28,7 +28,7 @@ public class TaskFollowPlayer : Node
         // Debug.Log("running");
         nav.SetDestination(playerTransform.position);
         state = NodeState.RUNNING;
-        // Debug.Log("state: " + state);
+        Debug.Log("state: " + state);
         return state;
 
     }

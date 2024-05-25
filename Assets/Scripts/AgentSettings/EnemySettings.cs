@@ -11,7 +11,6 @@ public class EnemySettings : ScriptableObject
     public float maxSpeed = 3;
     [SerializeField]
     private string weaponStr = "WeaponsStr";
-
     public string WeaponsStr
     {
         get { return weaponStr; }

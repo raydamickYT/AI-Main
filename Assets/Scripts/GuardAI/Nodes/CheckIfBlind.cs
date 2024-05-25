@@ -14,12 +14,14 @@ public class CheckIfBlind : Node
         bool IsBlind = GlobalBlackboard.Instance.GetVariable<bool>("EnemyIsBlind");
         if (IsBlind)
         {
-            state = NodeState.FAILURE; 
+            state = NodeState.FAILURE;
             return state;
         }
         else
         {
             state = NodeState.SUCCES;  //dus als de rook bom niet actief is kan de enemy gewoon zien
+            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+            GlobalBlackboard.Instance.SetVariable(str, false);
             return state;
         }
     }

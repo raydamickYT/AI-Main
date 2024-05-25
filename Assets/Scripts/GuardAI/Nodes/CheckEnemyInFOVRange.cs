@@ -33,7 +33,7 @@ public class CheckEnemyInFOVRange : Node
                 Parent.Parent.SetData(GuardBT.settings.TargetStr, colliders[0].transform);
                 
                 var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-                GlobalBlackboard.Instance.SetVariable(str, true); //als we deze node verlaten zijn we altijd aan het chasen.
+                GlobalBlackboard.Instance.SetVariable(str, true);
 
                 state = NodeState.SUCCES;
                 return state;
