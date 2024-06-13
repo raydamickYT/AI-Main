@@ -10,7 +10,7 @@ public class TaskThrowProjectile : Node
     private Transform startPos;
     private AllySettings settings;
     private bool waiting = false;
-    private float waitCounter = 0;
+    private float waitCounter = 0, projectileCounter = 0;
     private float waitTime = 1;
     private bool hasThrown = false;
 
@@ -55,33 +55,34 @@ public class TaskThrowProjectile : Node
         }
 
         // Logic to throw projectile
-        object t = GetData(settings.ThrownObjectStr);
+        object t = GetData(settings.ThrownObjectStr + projectileCounter);
         Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
 
-        if (t == null)
+        if (startPos == null) startPos = transform;
+
+        GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 85);
+
+        if (ThrownObject != null && !hasThrown)
         {
-            if (startPos == null) startPos = transform;
-
-            GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 85);
-
-            if (ThrownObject != null)
-            {
-                SetData(settings.ThrownObjectStr, ThrownObject.transform);
-                Debug.Log("Projectile thrown");
-                state = NodeState.SUCCES;
-                hasThrown = true;
-                return state;
-            }
-            else
-            {
-                Debug.LogError("Failed to throw projectile");
-                state = NodeState.FAILURE;
-                return state;
-            }
+            hasThrown = true;
+            // SetData(settings.ThrownObjectStr +projectileCounter, ThrownObject.transform);
+            // projectileCounter++;
+            Debug.Log("Projectile thrown" + projectileCounter);
+            state = NodeState.SUCCES;
+            return state;
         }
+        else
+        {
+            Debug.LogError("Failed to throw projectile");
+            state = NodeState.FAILURE;
+            return state;
+        }
+        // if (t == null)
+        // {
+        // }
 
-        state = NodeState.FAILURE;
-        return state;
+        // state = NodeState.FAILURE;
+        // return state;
     }
 
     public override void OnEnter()
@@ -103,5 +104,6 @@ public class TaskThrowProjectile : Node
         // Debug.LogWarning("dit is mijn state" + state);
         waiting = false;
         hasThrown = false;
+        waitCounter = 0;
     }
 }
