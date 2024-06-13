@@ -13,6 +13,8 @@ public class TaskFollowPlayer : Node
     public override void OnEnter()
     {
         Debug.LogWarning("following player");
+
+        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
         base.OnEnter();
     }
 

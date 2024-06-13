@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using BehaviourTree;
 
@@ -24,6 +25,7 @@ public class TaskAttackTarget : Node
         {
             //if this is true, the enemy is attacking.
             GlobalBlackboard.Instance.SetVariable(str, true);
+            TestIsDead = true;
         }
 
         //since this node is only called once the previous node has returned a succes
@@ -34,6 +36,7 @@ public class TaskAttackTarget : Node
             //if the target is dead, we clear the data and return to patrolling.
             state = NodeState.SUCCES;
             ClearData(GuardBT.settings.TargetStr);
+            SceneManager.LoadScene("Dead");
             return state;
         }
         else

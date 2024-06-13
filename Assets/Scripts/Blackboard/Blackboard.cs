@@ -11,7 +11,7 @@ public class Blackboard
         {
             return (T)dictionary[name];
         }
-        return default(T);
+        return default;
     }
 
     public void SetVariable<T>(string name, T variable)
