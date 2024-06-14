@@ -23,14 +23,18 @@ public class Projectile : MonoBehaviour
 
     IEnumerator SmokeBombEffect()
     {
+        Debug.Log("isblind Collision");
+        GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", true);
         yield return new WaitForSeconds(3);
         GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", false);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("rook bom gaat af");
-        GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", true);
-        StartCoroutine(SmokeBombEffect());
+        if (other.gameObject.tag == "Ground")
+        {
+            Debug.Log("rook bom gaat af");
+            StartCoroutine(SmokeBombEffect());
+        }
     }
 }

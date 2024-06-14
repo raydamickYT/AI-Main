@@ -8,6 +8,7 @@ public class TaskGoToTarget : Node
     private Transform transform;
     private NavMeshAgent nav;
     private GuardBT guard;
+    // public Transform target;
 
     public TaskGoToTarget(Transform _transform, NavMeshAgent _nav, GuardBT _guard)
     {
@@ -19,9 +20,12 @@ public class TaskGoToTarget : Node
     public override NodeState Evaluate()
     {
         Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
+        UnityEngine.Debug.Log("" + target);
         if (target == null)
         {
             Debug.LogError($"Target not found using key {GuardBT.settings.TargetStr}. Failing attack range check.");
+            state = NodeState.FAILURE;
+            return state;
         }
         float dist = Vector3.Distance(transform.position, target.position);
         if (guard.EquippedItems.Count == 0)
@@ -40,7 +44,7 @@ public class TaskGoToTarget : Node
         {
             ClearData(GuardBT.settings.TargetStr);
             Debug.Log("out of range");
-            state = NodeState.FAILURE;
+            state = NodeState.FAILURE; //als de target out of range is dan mag de node niet verder.
             return state;
         }
         state = NodeState.RUNNING;
