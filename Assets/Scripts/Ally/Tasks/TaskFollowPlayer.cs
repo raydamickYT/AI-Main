@@ -22,6 +22,11 @@ public class TaskFollowPlayer : Node
     {
         Debug.LogWarning("following player");
 
+        base.OnEnter();
+    }
+
+    public override NodeState Evaluate()
+    {
         if (allyBT == null)
         {
             allyBT = transform.GetComponent<AllyBT>();
@@ -31,11 +36,6 @@ public class TaskFollowPlayer : Node
         {
             allyBT.StateText.text = "TaskFollowPlayer";
         }
-        base.OnEnter();
-    }
-
-    public override NodeState Evaluate()
-    {
         // Debug.Log("running");
         nav.SetDestination(playerTransform.position);
         state = NodeState.RUNNING;
