@@ -1,11 +1,12 @@
 using BehaviourTree;
 using UnityEngine;
 
-public class CheckShouldHide : Node
+public class CheckShouldHide : Decorator
 {
-    public CheckShouldHide()
+    public CheckShouldHide(Node _child) : base(_child)
     {
     }
+
     public override void OnEnter()
     {
         base.OnEnter();
@@ -24,17 +25,23 @@ public class CheckShouldHide : Node
         // Voor dit voorbeeld controleer ik een fictieve variabele "shouldHide".
         string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
-        // Debug.LogWarning("should hide: " + shouldHide);
+        Debug.LogWarning("should hide: " + GlobalBlackboard.Instance.GetVariable<bool>(str));
 
-        if (shouldHide)
-        {
-            state = NodeState.SUCCES;
-            return state;
-        }
-        else
+        if (!shouldHide)
         {
             state = NodeState.FAILURE;
             return state;
         }
+        else
+        {
+            state = child.Evaluate();
+            return state;
+        }
+    }
+
+    public override void SetupBlackboard(Blackboard blackboard)
+    {
+        base.SetupBlackboard(blackboard);
+        child.SetupBlackboard(blackboard);
     }
 }

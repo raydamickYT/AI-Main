@@ -65,6 +65,7 @@ public class TaskThrowProjectile : Node
         if (ThrownObject != null && !hasThrown)
         {
             hasThrown = true;
+            GlobalBlackboard.Instance.SetVariable("hasThrown", hasThrown);
             // SetData(settings.ThrownObjectStr +projectileCounter, ThrownObject.transform);
             // projectileCounter++;
             Debug.Log("Projectile thrown" + projectileCounter);

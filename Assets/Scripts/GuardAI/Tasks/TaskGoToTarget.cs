@@ -33,6 +33,11 @@ public class TaskGoToTarget : Node
             state = NodeState.RUNNING;
             return state;
         }
+        else
+        {
+            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+            GlobalBlackboard.Instance.SetVariable(str, true);
+        }
         //checks if target is near the target
         if (dist > GuardBT.settings.StopDist)
         {
@@ -44,6 +49,8 @@ public class TaskGoToTarget : Node
         {
             ClearData(GuardBT.settings.TargetStr);
             Debug.Log("out of range");
+            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+            GlobalBlackboard.Instance.SetVariable(str, false);
             state = NodeState.FAILURE; //als de target out of range is dan mag de node niet verder.
             return state;
         }

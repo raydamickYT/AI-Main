@@ -39,6 +39,7 @@ namespace BehaviourTree
 
         public void SetData(string key, object value)
         {
+            UnityEngine.Debug.Log(key + "is hiding");
             dataContext[key] = value;
         }
 
@@ -128,6 +129,7 @@ namespace BehaviourTree
         public Decorator(Node _child)
         {
             child = _child;
+            child.Parent = this;
         }
 
         public override void SetupBlackboard(Blackboard blackboard)

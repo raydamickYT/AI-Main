@@ -3,14 +3,11 @@ using BehaviourTree;
 public class CheckEnemyNear : Node
 {
 
-    //7th layer (moves 1 bit 7 places to the left)
-    private LayerMask enemyLayerMask;
     private Transform transform;
 
     public CheckEnemyNear(Transform _transform, LayerMask _enemyMask)
     {
         transform = _transform;
-        enemyLayerMask = _enemyMask;
     }
 
     public override void OnEnter()
@@ -31,6 +28,7 @@ public class CheckEnemyNear : Node
             if (dist < AllyBT.Settings.DangerPerceptionRadius)
             {
                 // Enemy is within perception radius
+                Debug.Log("Parent" + Parent);
                 Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, enemyPosition);
                 state = NodeState.SUCCES;
             }

@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour
         GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", true);
         yield return new WaitForSeconds(3);
         GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", false);
+        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
         Destroy(this.gameObject);
     }
     void OnCollisionEnter(Collision other)
