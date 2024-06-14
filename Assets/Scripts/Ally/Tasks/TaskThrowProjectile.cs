@@ -13,12 +13,14 @@ public class TaskThrowProjectile : Node
     private float waitCounter = 0, projectileCounter = 0;
     private float waitTime = 1;
     private bool hasThrown = false;
+    private AllyBT allyBT;
 
     public TaskThrowProjectile(Transform _transform)
     {
         transform = _transform;
         settings = AllyBT.Settings;
     }
+
     public override NodeState Evaluate()
     {
         //check of hij niet al gegooid heeft
@@ -93,9 +95,16 @@ public class TaskThrowProjectile : Node
         waiting = false;
         // hasThrown = false;
         hasThrown = GlobalBlackboard.Instance.GetVariable<bool>("hasThrown");
-        Debug.LogWarning("Trowing Object");
-        string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-        bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
+        Debug.LogWarning("Trowing Object " + hasThrown);
+        if (allyBT == null)
+        {
+            allyBT = transform.GetComponent<AllyBT>();
+            allyBT.StateText.text = "TaskThrowProjectile";
+        }
+        else
+        {
+            allyBT.StateText.text = "TaskThrowProjectile";
+        }
         // Debug.Log("should hide: " + shouldHide);
     }
 

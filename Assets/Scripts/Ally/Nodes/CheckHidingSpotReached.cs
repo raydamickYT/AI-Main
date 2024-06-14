@@ -4,6 +4,8 @@ using UnityEngine;
 public class CheckHidingSpotReached : Node
 {
     public Transform transform;
+    private AllyBT allyBT;
+
     public CheckHidingSpotReached(Transform _transform)
     {
         transform = _transform;
@@ -11,6 +13,15 @@ public class CheckHidingSpotReached : Node
     public override void OnEnter()
     {
         Debug.LogWarning("Checking if I'm near a hiding spot");
+        if (allyBT == null)
+        {
+            allyBT = transform.GetComponent<AllyBT>();
+            allyBT.StateText.text = "CheckHidingSpotReached";
+        }
+        else
+        {
+            allyBT.StateText.text = "CheckHidingSpotReached";
+        }
     }
     public override NodeState Evaluate()
     {

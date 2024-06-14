@@ -7,11 +7,26 @@ public class CheckForNearbyTree : Node
 {
     Transform transform;
     private LayerMask obstructionLayer;
+    private AllyBT allyBT;
 
     public CheckForNearbyTree(Transform _transform)
     {
         transform = _transform;
         obstructionLayer = AllyBT.Settings.TreeMask | AllyBT.Settings.EnemyMask;
+    }
+    public override void OnEnter()
+    {
+        Debug.LogWarning("following player");
+
+        if (allyBT == null)
+        {
+            allyBT = transform.GetComponent<AllyBT>();
+            allyBT.StateText.text = "CheckForNearbyTree";
+        }
+        else
+        {
+            allyBT.StateText.text = "CheckForearbyTree";
+        }
     }
 
     public override NodeState Evaluate()

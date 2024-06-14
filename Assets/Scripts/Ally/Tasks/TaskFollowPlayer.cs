@@ -9,20 +9,29 @@ public class TaskFollowPlayer : Node
 {
     public Transform transform, playerTransform;
     private NavMeshAgent nav;
+    private AllyBT allyBT;
 
-    public override void OnEnter()
-    {
-        Debug.LogWarning("following player");
-
-        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
-        base.OnEnter();
-    }
 
     public TaskFollowPlayer(Transform _transform, Transform _playerTransform, NavMeshAgent _nav)
     {
         nav = _nav;
         transform = _transform;
         playerTransform = _playerTransform;
+    }
+    public override void OnEnter()
+    {
+        Debug.LogWarning("following player");
+
+        if (allyBT == null)
+        {
+            allyBT = transform.GetComponent<AllyBT>();
+            allyBT.StateText.text = "TaskFollowPlayer";
+        }
+        else
+        {
+            allyBT.StateText.text = "TaskFollowPlayer";
+        }
+        base.OnEnter();
     }
 
     public override NodeState Evaluate()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AllyBT : Tree
 {
@@ -12,6 +13,7 @@ public class AllyBT : Tree
     public static AllySettings Settings;
     public UnityEngine.Transform PlayerTransform;
     public NavMeshAgent Nav;
+    public Text StateText;
 
     public static float speed(float dist)
     {
