@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BehaviourTree;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine.AI;
 
 /// <summary>
@@ -26,22 +27,26 @@ public class GuardBT : Tree
     {
         Node Root = IsAllowedToTrack ?
             new Selector(new List<Node>{
-                new Sequence(new List<Node>{
+                new CheckIfBlind(EnemyBehaviour()),
+                new TaskPatrol(transform, WayPoints, nav),
+            }) :
+            new TaskPatrol(transform, WayPoints, nav);
+
+        return Root;
+    }
+    private Node EnemyBehaviour()
+    {
+        return new Sequence(new List<Node>{
                     new CheckEnemyInFOVRange(transform),
                     new Selector(new List<Node>{
                         new Sequence(new List<Node>{
                             new CheckIfWeaponInInventory(this),
                             new TaskPickUpWeapon(transform, nav, this),
                         }),
-                        new CheckIfBlind(new TaskGoToTarget(transform, nav, this)),
+                        new TaskGoToTarget(transform, nav, this),
                         // new TaskGoToTarget(transform, nav, this)
                     })
-                }),
-                new TaskPatrol(transform, WayPoints, nav),
-            }) :
-            new TaskPatrol(transform, WayPoints, nav);
-
-        return Root;
+        });
     }
 
     protected override void Initialization()

@@ -17,8 +17,9 @@ public class CheckIfBlind : Decorator
         {
             var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
             GlobalBlackboard.Instance.SetVariable(str, false);
-            state = NodeState.FAILURE;
+            state = NodeState.SUCCES;
             return state;
+
         }
         else
         {
@@ -33,7 +34,6 @@ public class CheckIfBlind : Decorator
         base.SetupBlackboard(blackboard);
         child.SetupBlackboard(blackboard);
     }
-
 }
 
 
