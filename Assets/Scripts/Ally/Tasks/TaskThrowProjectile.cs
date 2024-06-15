@@ -26,7 +26,7 @@ public class TaskThrowProjectile : Node
         //check of hij niet al gegooid heeft
         if (hasThrown)
         {
-            Debug.Log("Already thrown, returning SUCCESS");
+            // Debug.Log("Already thrown, returning SUCCESS");
             state = NodeState.SUCCES;
             return state;
         }
@@ -93,9 +93,9 @@ public class TaskThrowProjectile : Node
         base.OnEnter();
         // Reset waiting state on enter
         waiting = false;
-        // hasThrown = false;
         hasThrown = GlobalBlackboard.Instance.GetVariable<bool>("hasThrown");
-        Debug.LogWarning("Trowing Object " + hasThrown);
+
+        //update tekst boven ai hoofd
         if (allyBT == null)
         {
             allyBT = transform.GetComponent<AllyBT>();
@@ -105,7 +105,6 @@ public class TaskThrowProjectile : Node
         {
             allyBT.StateText.text = "TaskThrowProjectile";
         }
-        // Debug.Log("should hide: " + shouldHide);
     }
 
     public override void OnExit()

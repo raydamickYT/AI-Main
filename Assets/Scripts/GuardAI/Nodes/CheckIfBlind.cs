@@ -12,6 +12,7 @@ public class CheckIfBlind : Decorator
     }
     public override void OnEnter()
     {
+        //tekst aanpassen boven het hoofd van de ai
         guardBT.StateText.text = "CheckIfBlind";
         base.OnEnter();
     }
@@ -19,7 +20,6 @@ public class CheckIfBlind : Decorator
     public override NodeState Evaluate()
     {
         bool IsBlind = GlobalBlackboard.Instance.GetVariable<bool>("EnemyIsBlind");
-        Debug.Log("isblind " + IsBlind);
         if (IsBlind)
         {
             var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
@@ -32,9 +32,11 @@ public class CheckIfBlind : Decorator
         {
             Transform t = (Transform)GetData(GuardBT.settings.TargetStr);
             child.SetData(GuardBT.settings.TargetStr, t);
+
             state = child.Evaluate();  //dus als de rook bom niet actief is kan de enemy gewoon zien
             if (state == NodeState.SUCCES)
             {
+                //dit doe ik om te vorkomen dat de volgende task wordt uitgevoerd. anders staat de ai stil nadat hij zn wapen oppakt
                 state = NodeState.FAILURE;
             }
 

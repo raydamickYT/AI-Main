@@ -26,6 +26,7 @@ public class TaskPatrol : Node
     }
     public override NodeState Evaluate()
     {
+        //tekst aanpassen boven het hoofd van de ai
         if (guard == null)
         {
             guard = transform.GetComponent<GuardBT>();
@@ -35,6 +36,7 @@ public class TaskPatrol : Node
         {
             guard.StateText.text = "TaskPatrol";
         }
+
         if (waiting)
         {
             waitCounter += Time.deltaTime;

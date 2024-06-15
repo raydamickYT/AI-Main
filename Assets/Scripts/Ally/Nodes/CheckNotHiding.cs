@@ -25,7 +25,7 @@ public class CheckShouldHide : Decorator
         // Voor dit voorbeeld controleer ik een fictieve variabele "shouldHide".
         string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
-        Debug.LogWarning("should hide: " + GlobalBlackboard.Instance.GetVariable<bool>(str));
+        // Debug.LogWarning("should hide: " + GlobalBlackboard.Instance.GetVariable<bool>(str));
 
         if (!shouldHide)
         {

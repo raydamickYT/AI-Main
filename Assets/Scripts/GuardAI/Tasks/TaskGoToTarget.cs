@@ -19,6 +19,7 @@ public class TaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
+        //tekst aanpassen boven het hoofd van de ai
         guard.StateText.text = "TaskGoToTarget";
 
         Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
@@ -40,17 +41,18 @@ public class TaskGoToTarget : Node
             var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
             GlobalBlackboard.Instance.SetVariable(str, true);
         }
-        //checks if target is near the target
+        //checks if guard is near the target
         if (dist > GuardBT.settings.StopDist)
         {
             nav.SetDestination(target.position);
         }
 
+
         //checks if target is still in range.
         if (Vector3.Distance(transform.position, target.position) >= GuardBT.settings.PerceptionRadius)
         {
             ClearData(GuardBT.settings.TargetStr);
-            Debug.Log("out of range");
+            // Debug.Log("out of range");
             var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
             GlobalBlackboard.Instance.SetVariable(str, false);
             state = NodeState.FAILURE; //als de target out of range is dan mag de node niet verder.
@@ -58,11 +60,5 @@ public class TaskGoToTarget : Node
         }
         state = NodeState.RUNNING;
         return state;
-    }
-    public override void OnEnter()
-    {
-        // GlobalBlackboard.Instance.SetVariable("ShouldHide", true); //als de enemy begint met zn achtervolging is dit true
-        //we zetten deze variabele weer op false in: TaskPatrol.cs
-        base.OnEnter();
     }
 }

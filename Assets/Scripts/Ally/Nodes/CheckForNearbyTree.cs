@@ -16,8 +16,7 @@ public class CheckForNearbyTree : Node
     }
     public override void OnEnter()
     {
-        Debug.LogWarning("following player");
-
+        //update tekst boven ai hoofd
         if (allyBT == null)
         {
             allyBT = transform.GetComponent<AllyBT>();

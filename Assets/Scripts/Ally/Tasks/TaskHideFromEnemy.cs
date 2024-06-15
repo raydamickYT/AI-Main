@@ -19,7 +19,8 @@ public class TaskHideFromEnemy : Node
     public override void OnEnter()
     {
         base.OnEnter();
-        // Debug.Log("TaskHideFromEnemy: OnEnter");
+
+        //update tekst boven ai hoofd
         if (allyBT == null)
         {
             allyBT = transform.GetComponent<AllyBT>();

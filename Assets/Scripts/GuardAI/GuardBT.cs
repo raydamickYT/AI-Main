@@ -46,8 +46,10 @@ public class GuardBT : Tree
                             new CheckIfWeaponInInventory(this),
                             new TaskPickUpWeapon(transform, nav, this),
                         }),
-                        new TaskGoToTarget(transform, nav, this),
-                        // new TaskGoToTarget(transform, nav, this)
+                        new Parallel(new List<Node>{
+                            new TaskGoToTarget(transform, nav, this),
+                            new TaskAttackTarget(transform),
+                        }),
                     })
         });
     }

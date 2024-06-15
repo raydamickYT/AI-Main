@@ -15,6 +15,7 @@ public class CheckEnemyInFOVRange : Node
     {
         base.OnEnter();
 
+        //tekst aanpassen boven het hoofd van de ai
         if (guardBT == null)
         {
             guardBT = transform.GetComponent<GuardBT>();

@@ -20,13 +20,14 @@ public class TaskFollowPlayer : Node
     }
     public override void OnEnter()
     {
-        Debug.LogWarning("following player");
+        // Debug.LogWarning("following player");
 
         base.OnEnter();
     }
 
     public override NodeState Evaluate()
     {
+        //update tekst boven ai hoofd
         if (allyBT == null)
         {
             allyBT = transform.GetComponent<AllyBT>();

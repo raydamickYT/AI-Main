@@ -25,7 +25,10 @@ public class TaskWaitForSeconds : Node
     {
         float elapsedTime = Time.time - startTime;
         float remainingTime = Mathf.Max(0, duration - elapsedTime);
+
+        //tekst aanpassen boven het hoofd van de ai
         guardBT.StateText.text = "TaskWaitforSeconds: " + remainingTime.ToString("F2");
+        
         if (Time.time - startTime > duration)
         {
             state = NodeState.SUCCES;

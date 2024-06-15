@@ -62,11 +62,13 @@ public class AllyBT : Tree
         {
             Settings = _allySettings;
         }
+
         Nav = GetComponent<NavMeshAgent>();
         if (Nav == null)
         {
             UnityEngine.Debug.LogWarning("no navmesh on the AllyAI");
         }
+
         GlobalBlackboard.Instance.SetVariable("ShouldHide", false);
         Nav.speed = Settings.MaxSpeed;
         Nav.stoppingDistance = Settings.SlowDist;

@@ -12,7 +12,7 @@ public class CheckHidingSpotReached : Node
     }
     public override void OnEnter()
     {
-        Debug.LogWarning("Checking if I'm near a hiding spot");
+        //update tekst boven ai hoofd
         if (allyBT == null)
         {
             allyBT = transform.GetComponent<AllyBT>();
