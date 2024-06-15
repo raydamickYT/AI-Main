@@ -7,10 +7,12 @@ public class TaskWaitForSeconds : Node
 {
     private float duration;
     private float startTime;
+    private GuardBT guardBT;
 
-    public TaskWaitForSeconds(float duration)
+    public TaskWaitForSeconds(GuardBT _guardBT, float duration)
     {
         this.duration = duration;
+        guardBT = _guardBT;
     }
 
     public override void OnEnter()
@@ -21,6 +23,9 @@ public class TaskWaitForSeconds : Node
 
     public override NodeState Evaluate()
     {
+        float elapsedTime = Time.time - startTime;
+        float remainingTime = Mathf.Max(0, duration - elapsedTime);
+        guardBT.StateText.text = "TaskWaitforSeconds: " + remainingTime.ToString("F2");
         if (Time.time - startTime > duration)
         {
             state = NodeState.SUCCES;

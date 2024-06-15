@@ -19,6 +19,8 @@ public class TaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
+        guard.StateText.text = "TaskGoToTarget";
+
         Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
         UnityEngine.Debug.Log("" + target);
         if (target == null)
@@ -61,7 +63,6 @@ public class TaskGoToTarget : Node
     {
         // GlobalBlackboard.Instance.SetVariable("ShouldHide", true); //als de enemy begint met zn achtervolging is dit true
         //we zetten deze variabele weer op false in: TaskPatrol.cs
-        guard.StateText.text = "TaskGoToTarget";
         base.OnEnter();
     }
 }

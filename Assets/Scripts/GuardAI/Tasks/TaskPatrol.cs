@@ -26,6 +26,15 @@ public class TaskPatrol : Node
     }
     public override NodeState Evaluate()
     {
+        if (guard == null)
+        {
+            guard = transform.GetComponent<GuardBT>();
+            guard.StateText.text = "TaskPatrol";
+        }
+        else
+        {
+            guard.StateText.text = "TaskPatrol";
+        }
         if (waiting)
         {
             waitCounter += Time.deltaTime;
@@ -61,15 +70,7 @@ public class TaskPatrol : Node
     {
         // GlobalBlackboard.Instance.SetVariable("ShouldHide", true); //als de enemy begint met zn achtervolging is dit true
         //we zetten deze var weer op true in: TaskGoToTarget.cs
-        if (guard == null)
-        {
-            guard = transform.GetComponent<GuardBT>();
-            guard.StateText.text = "TaskPatrol";
-        }
-        else
-        {
-            guard.StateText.text = "TaskPatrol";
-        }
+
         base.OnEnter();
     }
 }

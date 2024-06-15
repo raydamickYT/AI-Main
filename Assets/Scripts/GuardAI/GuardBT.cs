@@ -27,7 +27,10 @@ public class GuardBT : Tree
     {
         Node Root = IsAllowedToTrack ?
             new Selector(new List<Node>{
-                new CheckIfBlind(this, EnemyBehaviour()),
+                new Sequence(new List<Node> {
+                    new CheckIfBlind(this, EnemyBehaviour()),
+                    new TaskWaitForSeconds(this, 10),
+                }),
                 new TaskPatrol(transform, WayPoints, nav),
             }) :
             new TaskPatrol(transform, WayPoints, nav);

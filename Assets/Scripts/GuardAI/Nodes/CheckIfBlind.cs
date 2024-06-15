@@ -12,7 +12,7 @@ public class CheckIfBlind : Decorator
     }
     public override void OnEnter()
     {
-        guardBT.StateText.text = "CheckEnemyInFOVRange";
+        guardBT.StateText.text = "CheckIfBlind";
         base.OnEnter();
     }
 
@@ -33,6 +33,11 @@ public class CheckIfBlind : Decorator
             Transform t = (Transform)GetData(GuardBT.settings.TargetStr);
             child.SetData(GuardBT.settings.TargetStr, t);
             state = child.Evaluate();  //dus als de rook bom niet actief is kan de enemy gewoon zien
+            if (state == NodeState.SUCCES)
+            {
+                state = NodeState.FAILURE;
+            }
+
             return state;
         }
     }

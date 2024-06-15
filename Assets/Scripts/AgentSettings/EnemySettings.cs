@@ -40,7 +40,7 @@ public class EnemySettings : ScriptableObject
     [Header("Layer Masks")]
     public LayerMask TargetMask, WeaponMask;
     [Header("Avoidance & Detection")]
-    public float PerceptionRadius = 6f, AtkRange = 2f, StopDist = 2, SlowDist = 5;
+    public float PerceptionRadius = 5f, AtkRange = 2f, StopDist = 2, SlowDist = 5;
     public float AvoidanceRadius = 1;
 
 }
