@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BehaviourTree
 {
@@ -10,6 +11,9 @@ namespace BehaviourTree
         public Node root = null;
         private string aiID;
         protected GlobalBlackboard blackboard;
+        public Text StateText;
+        [Tooltip("Zorg dat de camera of camera holder op dit object zit.")]
+        public GameObject CameraHolder;
 
         protected void Start()
         {
@@ -28,6 +32,11 @@ namespace BehaviourTree
                 GlobalBlackboard.Instance.UpdateAIPosition(aiID, transform.position);
 
                 root.Evaluate();
+            }
+            if (CameraHolder != null && StateText != null)
+            {
+                StateText.gameObject.transform.LookAt(CameraHolder.transform.position);
+                StateText.transform.Rotate(0, 180, 0);
             }
         }
 

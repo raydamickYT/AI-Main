@@ -13,7 +13,6 @@ public class AllyBT : Tree
     public static AllySettings Settings;
     public UnityEngine.Transform PlayerTransform;
     public NavMeshAgent Nav;
-    public Text StateText;
 
     public static float speed(float dist)
     {

@@ -19,15 +19,16 @@ public class Projectile : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         sp.enabled = true;
+        yield return new WaitForSeconds(10); //als failsafe. stel dat de bom niks raakt dan kan de ally niet meer gooien.
+        Destroy(this);
     }
 
-    IEnumerator SmokeBombEffect()
+    IEnumerator SmokeBombEffect(int time)
     {
         Debug.Log("isblind Collision");
         GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", true);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(time);
         GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", false);
-        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
         Destroy(this.gameObject);
     }
     void OnCollisionEnter(Collision other)
@@ -35,7 +36,11 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             Debug.Log("rook bom gaat af");
-            StartCoroutine(SmokeBombEffect());
+            StartCoroutine(SmokeBombEffect(3));
         }
+    }
+    void OnDestroy()
+    {
+        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
     }
 }

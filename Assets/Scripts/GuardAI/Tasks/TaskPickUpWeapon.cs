@@ -18,6 +18,12 @@ public class TaskPickUpWeapon : Node
         guard = _guard;
     }
 
+    public override void OnEnter()
+    {
+        guard.StateText.text = "TaskPickUpWeapon";
+        base.OnEnter();
+    }
+
     public override NodeState Evaluate()
     {
         object w = GetData(GuardBT.settings.WeaponsStr);
@@ -37,7 +43,7 @@ public class TaskPickUpWeapon : Node
                 {
                     // item.SetActive(false);
                     guard.EquippedItems.Add(item);
-                    item.transform.SetParent(guard.WeaponHolder.transform); 
+                    item.transform.SetParent(guard.WeaponHolder.transform);
 
                     //reset local values
                     item.transform.localPosition = Vector3.zero;
@@ -48,7 +54,7 @@ public class TaskPickUpWeapon : Node
 
                     //set world pos
                     // item.transform.position = guard.WeaponHolder.transform.position;
-                    
+
                     //return succes
                     state = NodeState.SUCCES;
                     return state;

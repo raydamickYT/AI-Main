@@ -17,6 +17,7 @@ public class TaskPatrol : Node
     private float waitTime = 1f; //in seconds
     private float waitCounter = 0f;
     private bool waiting = false;
+    private GuardBT guard;
     public TaskPatrol(Transform _transform, Transform[] _wayPoints, NavMeshAgent _nav)
     {
         transform = _transform;
@@ -60,6 +61,15 @@ public class TaskPatrol : Node
     {
         // GlobalBlackboard.Instance.SetVariable("ShouldHide", true); //als de enemy begint met zn achtervolging is dit true
         //we zetten deze var weer op true in: TaskGoToTarget.cs
+        if (guard == null)
+        {
+            guard = transform.GetComponent<GuardBT>();
+            guard.StateText.text = "TaskPatrol";
+        }
+        else
+        {
+            guard.StateText.text = "TaskPatrol";
+        }
         base.OnEnter();
     }
 }

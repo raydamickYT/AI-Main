@@ -4,6 +4,7 @@ using UnityEngine;
 public class CheckEnemyInFOVRange : Node
 {
     private Transform transform;
+    private GuardBT guardBT;
 
     public CheckEnemyInFOVRange(Transform _transform)
     {
@@ -13,6 +14,16 @@ public class CheckEnemyInFOVRange : Node
     public override void OnEnter()
     {
         base.OnEnter();
+
+        if (guardBT == null)
+        {
+            guardBT = transform.GetComponent<GuardBT>();
+            guardBT.StateText.text = "CheckEnemyInFOVRange";
+        }
+        else
+        {
+            guardBT.StateText.text = "CheckEnemyInFOVRange";
+        }
         // var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         // GlobalBlackboard.Instance.SetVariable(str, false);
     }
@@ -31,7 +42,7 @@ public class CheckEnemyInFOVRange : Node
                 //we store the collider  the root in case we collide with an enemy. 
                 //the root is 2 levels above, thus the parent.parent
                 Parent.Parent.SetData(GuardBT.settings.TargetStr, colliders[0].transform);
-                
+
 
 
                 state = NodeState.SUCCES;

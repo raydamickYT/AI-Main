@@ -773,14 +773,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389795624}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -0.05}
   m_LocalScale: {x: 0.0031937202, y: 0.0031937202, z: 0.0031937202}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1579882097}
   m_Father: {fileID: 512995716}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.1, y: 1.59}
@@ -989,6 +989,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4eccb84278c1e4c813484067cf8024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StateText: {fileID: 1579882098}
+  CameraHolder: {fileID: 1595389209}
   _settings: {fileID: 11400000, guid: d90de938fa2c7c24cac959cffd4408b6, type: 2}
   WeaponHolder: {fileID: 375826101}
   WayPoints:
@@ -1143,7 +1145,7 @@ PrefabInstance:
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.75
+      value: 6.94
       objectReference: {fileID: 0}
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
@@ -1153,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.529999
+      value: -7.81
       objectReference: {fileID: 0}
     - target: {fileID: 8378069165104799179, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
         type: 3}
@@ -1760,6 +1762,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579882096}
   m_CullTransparentMesh: 1
+--- !u!1 &1595389209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9213736176694806985, guid: b19e6d29bdf2b8848a19ecb0f6f93f4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 521032563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1788809081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,10 +2068,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310dfee3ea29cc84ea7af4ff0830f885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StateText: {fileID: 2021506405}
+  CameraHolder: {fileID: 1595389209}
   _allySettings: {fileID: 11400000, guid: d2adfc72d71c68c4eabd49fe6e2c28fa, type: 2}
   PlayerTransform: {fileID: 1100005964}
   Nav: {fileID: 1854724393}
-  StateText: {fileID: 2021506405}
 --- !u!195 &1854724393
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class CheckIfBlind : Decorator
 {
-    public CheckIfBlind(Node _child) : base(_child)
+    private GuardBT guardBT;
+    public CheckIfBlind(GuardBT _guard, Node _child) : base(_child)
     {
+        guardBT = _guard;
+    }
+    public override void OnEnter()
+    {
+        guardBT.StateText.text = "CheckEnemyInFOVRange";
+        base.OnEnter();
     }
 
     public override NodeState Evaluate()

@@ -10,10 +10,15 @@ public class CheckIfWeaponInInventory : Node
     {
         guard = _guard;
     }
+    public override void OnEnter()
+    {
+
+        guard.StateText.text = "CheckIfWeaponInInventory";
+        base.OnEnter();
+    }
 
     public override NodeState Evaluate()
     {
-        // Example logic: Check if the agent already has a weapon
         if (guard.EquippedItems.Count == 0)
         {
             guard.InNeedOfWeapon = true;
