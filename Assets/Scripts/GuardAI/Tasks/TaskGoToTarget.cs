@@ -38,6 +38,7 @@ public class TaskGoToTarget : Node
         }
         else
         {
+            //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
             var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
             GlobalBlackboard.Instance.SetVariable(str, true);
         }
@@ -53,8 +54,8 @@ public class TaskGoToTarget : Node
         {
             ClearData(GuardBT.settings.TargetStr);
             // Debug.Log("out of range");
-            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-            GlobalBlackboard.Instance.SetVariable(str, false);
+            // var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+            // GlobalBlackboard.Instance.SetVariable(str, false);
             state = NodeState.FAILURE; //als de target out of range is dan mag de node niet verder.
             return state;
         }

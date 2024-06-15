@@ -44,7 +44,9 @@ public class CheckEnemyInFOVRange : Node
                 //the root is 2 levels above, thus the parent.parent
                 Parent.Parent.SetData(GuardBT.settings.TargetStr, colliders[0].transform);
 
-
+                //laat aan de ally weten dat hij hem heeft gezien en is begonnen met chasen.
+                var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+                GlobalBlackboard.Instance.SetVariable(str, true);
 
                 state = NodeState.SUCCES;
                 return state;

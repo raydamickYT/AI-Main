@@ -26,6 +26,8 @@ public class TaskPatrol : Node
     }
     public override NodeState Evaluate()
     {
+        var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+        GlobalBlackboard.Instance.SetVariable(str, false);
         //tekst aanpassen boven het hoofd van de ai
         if (guard == null)
         {

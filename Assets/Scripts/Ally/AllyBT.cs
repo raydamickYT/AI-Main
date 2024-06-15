@@ -42,7 +42,7 @@ public class AllyBT : Tree
 
     private Node SearchForEnemy()
     {
-        UnityEngine.Debug.Log("runt");
+        // UnityEngine.Debug.Log("runt");
         return new Sequence(new List<Node>{
             // new CheckEnemyNear(transform, Settings.EnemyMask),
             new CheckForNearbyTree(transform), // Zoekt naar een nabijgelegen boom om te verstoppen

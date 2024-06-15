@@ -21,7 +21,7 @@ public class TaskAttackTarget : Node
 
         float dist = Vector3.Distance(transform.position, target.position);
         Debug.Log(dist);
-        if (dist <= GuardBT.settings.StopDist + 0.2) //small offset because the enemy ai stops just shy of 1 from the player
+        if (dist <= GuardBT.settings.StopDist + 0.5) //small offset because the enemy ai stops just shy of 1 from the player
         {
             //if this is true, the enemy is attacking.
             GlobalBlackboard.Instance.SetVariable(str, true);
