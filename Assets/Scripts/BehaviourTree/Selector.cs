@@ -15,18 +15,18 @@ namespace BehaviourTree
 
         public override NodeState Evaluate()
         {
-            if (!wasEntered)
+            if (!WasEntered)
             {
                 OnEnter();
-                wasEntered = true;
+                WasEntered = true;
             }
 
             foreach (Node node in Children)
             {
-                if (!node.wasEntered)
+                if (!node.WasEntered)
                 {
                     node.OnEnter();
-                    node.wasEntered = true;
+                    node.WasEntered = true;
                 }
 
                 NodeState result = node.Evaluate();
@@ -34,14 +34,14 @@ namespace BehaviourTree
                 {
                     case NodeState.FAILURE:
                         node.OnExit();
-                        node.wasEntered = false;
+                        node.WasEntered = false;
                         continue;
                     case NodeState.SUCCES:
                         node.OnExit();
-                        node.wasEntered = false;
+                        node.WasEntered = false;
                         state = NodeState.SUCCES;
                         OnExit();
-                        wasEntered = false;
+                        WasEntered = false;
                         return state;
                     case NodeState.RUNNING:
                         state = NodeState.RUNNING;
@@ -51,7 +51,7 @@ namespace BehaviourTree
 
             state = NodeState.FAILURE;
             OnExit();
-            wasEntered = false;
+            WasEntered = false;
             return state;
         }
 

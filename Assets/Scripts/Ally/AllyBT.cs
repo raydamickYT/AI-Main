@@ -47,7 +47,7 @@ public class AllyBT : Tree
             // new CheckEnemyNear(transform, Settings.EnemyMask),
             new CheckForNearbyTree(transform), // Zoekt naar een nabijgelegen boom om te verstoppen
             new TaskHideFromEnemy(transform, Nav), // Beweegt naar de schuilplaats
-            new CheckHidingSpotReached(transform), // Controleert of de schuilplaats is bereikt
+            // new CheckHidingSpotReached(transform), // Controleert of de schuilplaats is bereikt
             new TaskThrowProjectile(transform), // Gooit een projectiel na het bereiken van de schuilplaats
         });
     }

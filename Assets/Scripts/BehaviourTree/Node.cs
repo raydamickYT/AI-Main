@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using BehaviourTree;
 
 
 namespace BehaviourTree
@@ -14,7 +15,7 @@ namespace BehaviourTree
     public class Node
     {
         protected NodeState state;
-        public bool wasEntered = false;
+        public bool WasEntered = false;
         public Node Parent;
         protected Blackboard blackboard;
         protected List<Node> Children = new();
@@ -94,49 +95,4 @@ namespace BehaviourTree
             return false;
         }
     }
-    public class Composite : Node
-    {
-        public Composite() : base() { }
-
-        public Composite(List<Node> _children)
-        {
-            foreach (Node Child in _children)
-            {
-                attach(Child);
-            }
-        }
-        private void attach(Node node)
-        {
-            node.Parent = this;
-            Children.Add(node);
-        }
-
-        public override void SetupBlackboard(Blackboard blackboard)
-        {
-            base.SetupBlackboard(blackboard);
-            //takes the Children list in the Parent node
-            foreach (Node node in Children)
-            {
-                node.SetupBlackboard(blackboard);
-            }
-        }
-    }
-
-    public class Decorator : Node
-    {
-        protected Node child;
-
-        public Decorator(Node _child)
-        {
-            child = _child;
-            child.Parent = this;
-        }
-
-        public override void SetupBlackboard(Blackboard blackboard)
-        {
-            base.SetupBlackboard(blackboard);
-            child.SetupBlackboard(blackboard);
-        }
-    }
-
 }

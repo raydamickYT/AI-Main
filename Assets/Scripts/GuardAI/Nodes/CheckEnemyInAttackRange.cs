@@ -15,10 +15,10 @@ public class CheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.settings.TargetStr);
+        object t = GetData(GuardBT.Settings.TargetStr);
         if (t == null)
         {
-            Debug.LogError($"Target not found using key {GuardBT.settings.TargetStr}. Failing attack range check.");
+            Debug.LogError($"Target not found using key {GuardBT.Settings.TargetStr}. Failing attack range check.");
             // No target found, so we cannot be in attack range
             state = NodeState.FAILURE;
             return state;
@@ -27,7 +27,7 @@ public class CheckEnemyInAttackRange : Node
         Transform target = (Transform)t;
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        if (distanceToTarget <= GuardBT.settings.AtkRange)
+        if (distanceToTarget <= GuardBT.Settings.AtkRange)
         {
             // Target is within attack range
             // Debug.Log("Target within attack range");

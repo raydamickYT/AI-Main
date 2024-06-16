@@ -13,8 +13,9 @@ using UnityEngine.AI;
 /// <returns></returns>
 public class GuardBT : Tree
 {
-    public EnemySettings _settings;
-    public static EnemySettings settings;
+    [UnityEngine.SerializeField]
+    private EnemySettings _settings;
+    public static EnemySettings Settings;
     public UnityEngine.GameObject WeaponHolder;
     public UnityEngine.Transform[] WayPoints;
     // [UnityEngine.HideInInspector]
@@ -65,7 +66,7 @@ public class GuardBT : Tree
         }
         else
         {
-            settings = _settings;
+            Settings = _settings;
         }
         if (nav == null)
         {
@@ -73,8 +74,8 @@ public class GuardBT : Tree
         }
         else
         {
-            nav.speed = settings.maxSpeed;
-            nav.stoppingDistance = settings.StopDist;
+            nav.speed = Settings.MaxSpeed;
+            nav.stoppingDistance = Settings.StopDist;
         }
     }
 }

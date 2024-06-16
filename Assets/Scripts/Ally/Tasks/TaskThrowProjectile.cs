@@ -9,7 +9,7 @@ public class TaskThrowProjectile : Node
     private Transform transform;
     private Transform startPos;
     private AllySettings settings;
-    private bool waiting = false;
+    private bool isWaiting = false;
     private float waitCounter = 0, projectileCounter = 0;
     private float waitTime = 1;
     private bool hasThrown = false;
@@ -35,14 +35,14 @@ public class TaskThrowProjectile : Node
         bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
 
         // Start the waiting timer if allowed to throw and not already waiting
-        if (isAllowedToThrow && !waiting)
+        if (isAllowedToThrow && !isWaiting)
         {
-            waiting = true;
+            isWaiting = true;
             waitCounter = 0;
         }
 
         // While waiting, increment the counter
-        if (waiting)
+        if (isWaiting)
         {
             waitCounter += Time.deltaTime;
             if (waitCounter < waitTime)
@@ -53,7 +53,7 @@ public class TaskThrowProjectile : Node
             }
 
             // Wait time completed, proceed to throw the projectile
-            waiting = false;
+            isWaiting = false;
         }
 
         // Logic to throw projectile
@@ -92,7 +92,7 @@ public class TaskThrowProjectile : Node
     {
         base.OnEnter();
         // Reset waiting state on enter
-        waiting = false;
+        isWaiting = false;
         hasThrown = GlobalBlackboard.Instance.GetVariable<bool>("hasThrown");
 
         //update tekst boven ai hoofd
@@ -112,7 +112,7 @@ public class TaskThrowProjectile : Node
         base.OnExit();
         // Reset waiting state on exit
         // Debug.LogWarning("dit is mijn state" + state);
-        waiting = false;
+        isWaiting = false;
         // hasThrown = false;
         waitCounter = 0;
     }

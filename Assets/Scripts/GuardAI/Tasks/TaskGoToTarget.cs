@@ -7,31 +7,31 @@ public class TaskGoToTarget : Node
 {
     private Transform transform;
     private NavMeshAgent nav;
-    private GuardBT guard;
+    private GuardBT guardBT;
     // public Transform target;
 
     public TaskGoToTarget(Transform _transform, NavMeshAgent _nav, GuardBT _guard)
     {
         transform = _transform;
         nav = _nav;
-        guard = _guard;
+        guardBT = _guard;
     }
 
     public override NodeState Evaluate()
     {
         //tekst aanpassen boven het hoofd van de ai
-        guard.StateText.text = "TaskGoToTarget";
+        guardBT.StateText.text = "TaskGoToTarget";
 
-        Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
+        Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
         UnityEngine.Debug.Log("" + target);
         if (target == null)
         {
-            Debug.LogError($"Target not found using key {GuardBT.settings.TargetStr}. Failing attack range check.");
+            Debug.LogError($"Target not found using key {GuardBT.Settings.TargetStr}. Failing attack range check.");
             state = NodeState.FAILURE;
             return state;
         }
         float dist = Vector3.Distance(transform.position, target.position);
-        if (guard.EquippedItems.Count == 0)
+        if (guardBT.EquippedItems.Count == 0)
         {
             state = NodeState.RUNNING;
             return state;
@@ -43,16 +43,16 @@ public class TaskGoToTarget : Node
             GlobalBlackboard.Instance.SetVariable(str, true);
         }
         //checks if guard is near the target
-        if (dist > GuardBT.settings.StopDist)
+        if (dist > GuardBT.Settings.StopDist)
         {
             nav.SetDestination(target.position);
         }
 
 
         //checks if target is still in range.
-        if (Vector3.Distance(transform.position, target.position) >= GuardBT.settings.PerceptionRadius)
+        if (Vector3.Distance(transform.position, target.position) >= GuardBT.Settings.PerceptionRadius)
         {
-            ClearData(GuardBT.settings.TargetStr);
+            ClearData(GuardBT.Settings.TargetStr);
             // Debug.Log("out of range");
             // var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
             // GlobalBlackboard.Instance.SetVariable(str, false);

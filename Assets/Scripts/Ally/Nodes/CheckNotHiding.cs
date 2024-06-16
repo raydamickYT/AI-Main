@@ -29,6 +29,7 @@ public class CheckShouldHide : Decorator
 
         if (!shouldHide)
         {
+            ClearData(AllyBT.Settings.TreeStr);
             state = NodeState.FAILURE;
             return state;
         }

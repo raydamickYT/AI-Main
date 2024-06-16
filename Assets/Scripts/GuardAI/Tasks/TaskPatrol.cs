@@ -16,8 +16,8 @@ public class TaskPatrol : Node
 
     private float waitTime = 1f; //in seconds
     private float waitCounter = 0f;
-    private bool waiting = false;
-    private GuardBT guard;
+    private bool isWaiting = false;
+    private GuardBT guardBT;
     public TaskPatrol(Transform _transform, Transform[] _wayPoints, NavMeshAgent _nav)
     {
         transform = _transform;
@@ -29,22 +29,22 @@ public class TaskPatrol : Node
         var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         GlobalBlackboard.Instance.SetVariable(str, false);
         //tekst aanpassen boven het hoofd van de ai
-        if (guard == null)
+        if (guardBT == null)
         {
-            guard = transform.GetComponent<GuardBT>();
-            guard.StateText.text = "TaskPatrol";
+            guardBT = transform.GetComponent<GuardBT>();
+            guardBT.StateText.text = "TaskPatrol";
         }
         else
         {
-            guard.StateText.text = "TaskPatrol";
+            guardBT.StateText.text = "TaskPatrol";
         }
 
-        if (waiting)
+        if (isWaiting)
         {
             waitCounter += Time.deltaTime;
             if (waitCounter >= waitTime)
             {
-                waiting = false;
+                isWaiting = false;
             }
         }
         else
@@ -55,7 +55,7 @@ public class TaskPatrol : Node
             {
                 // transform.position = wp.position;
                 waitCounter = 0;
-                waiting = true;
+                isWaiting = true;
 
                 currentWayPointIndex = (currentWayPointIndex + 1) % wayPoints.Length;
             }

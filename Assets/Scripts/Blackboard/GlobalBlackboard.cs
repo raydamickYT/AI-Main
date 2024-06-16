@@ -51,8 +51,6 @@ public class GlobalBlackboard
         }
     }
 
-    private GlobalBlackboard() { }
-
     public T GetVariable<T>(string name)
     {
         if (dictionary.ContainsKey(name))

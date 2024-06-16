@@ -7,7 +7,7 @@ using BehaviourTree;
 
 public class TaskAttackTarget : Node
 {
-    private bool TestIsDead = false;
+    private bool playerIsDead = false;
     private Transform transform;
     public TaskAttackTarget(Transform _transform)
     {
@@ -17,25 +17,25 @@ public class TaskAttackTarget : Node
     public override NodeState Evaluate()
     {
         string str = GlobalBlackboard.Instance.AttackingPlayerStr;
-        Transform target = (Transform)GetData(GuardBT.settings.TargetStr);
+        Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
 
         float dist = Vector3.Distance(transform.position, target.position);
-        Debug.Log(dist);
-        if (dist <= GuardBT.settings.StopDist + 0.5) //small offset because the enemy ai stops just shy of 1 from the player
+        // Debug.Log(dist);
+        if (dist <= GuardBT.Settings.StopDist + 0.5) //small offset because the enemy ai stops just shy of 1 from the player
         {
             //if this is true, the enemy is attacking.
             GlobalBlackboard.Instance.SetVariable(str, true);
-            TestIsDead = true;
+            playerIsDead = true;
         }
 
         //since this node is only called once the previous node has returned a succes
         //we can do our attack logic here (preferably in an enemymanager script).
         // Debug.Log("attacking");
-        if (TestIsDead)
+        if (playerIsDead)
         {
             //if the target is dead, we clear the data and return to patrolling.
             state = NodeState.SUCCES;
-            ClearData(GuardBT.settings.TargetStr);
+            ClearData(GuardBT.Settings.TargetStr);
             SceneManager.LoadScene("Dead");
             return state;
         }

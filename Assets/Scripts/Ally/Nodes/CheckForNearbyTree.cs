@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BehaviourTree;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class CheckForNearbyTree : Node
@@ -55,6 +56,8 @@ public class CheckForNearbyTree : Node
                 }
 
             }
+            state = NodeState.FAILURE; //want als er niks is om achter te verschuilen dan is er iets fout in het level.
+            return state;
         }
 
         state = NodeState.SUCCES;
@@ -105,5 +108,4 @@ public class CheckForNearbyTree : Node
 
         return rating;
     }
-
 }

@@ -9,31 +9,31 @@ public class TaskPickUpWeapon : Node
 {
     private Transform transform;
     private NavMeshAgent nav;
-    private GuardBT guard;
+    private GuardBT guardBT;
 
     public TaskPickUpWeapon(Transform _transform, NavMeshAgent _nav, GuardBT _guard)
     {
         transform = _transform;
         nav = _nav;
-        guard = _guard;
+        guardBT = _guard;
     }
 
     public override void OnEnter()
     {
-        guard.StateText.text = "TaskPickUpWeapon";
+        guardBT.StateText.text = "TaskPickUpWeapon";
         base.OnEnter();
     }
 
     public override NodeState Evaluate()
     {
-        object w = GetData(GuardBT.settings.WeaponsStr);
-        if (guard.EquippedItems.Count < 1)
+        object w = GetData(GuardBT.Settings.WeaponsStr);
+        if (guardBT.EquippedItems.Count < 1)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 100, GuardBT.settings.WeaponMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 100, GuardBT.Settings.WeaponMask);
             // Debug.Log(colliders.Length);
             if (colliders.Length > 0)
             {
-                SetData(GuardBT.settings.WeaponsStr, colliders[0]);
+                SetData(GuardBT.Settings.WeaponsStr, colliders[0]);
                 GameObject item = colliders[0].gameObject;
                 float dist = Vector3.Distance(transform.position, item.transform.position);
                 // transform.position = Vector3.MoveTowards(transform.position, item.transform.position, GuardBT.settings.persueSpeed(dist) * Time.deltaTime);
@@ -42,8 +42,8 @@ public class TaskPickUpWeapon : Node
                 if (dist < 1.2)
                 {
                     // item.SetActive(false);
-                    guard.EquippedItems.Add(item);
-                    item.transform.SetParent(guard.WeaponHolder.transform);
+                    guardBT.EquippedItems.Add(item);
+                    item.transform.SetParent(guardBT.WeaponHolder.transform);
 
                     //reset local values
                     item.transform.localPosition = Vector3.zero;
@@ -62,6 +62,8 @@ public class TaskPickUpWeapon : Node
                 state = NodeState.RUNNING;
                 return state;
             }
+            state = NodeState.FAILURE;
+            return state;
         }
         state = NodeState.SUCCES;
         return state;

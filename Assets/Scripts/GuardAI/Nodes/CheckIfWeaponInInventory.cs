@@ -5,31 +5,31 @@ using UnityEngine;
 
 public class CheckIfWeaponInInventory : Node
 {
-    private GuardBT guard;
+    private GuardBT guardBT;
     public CheckIfWeaponInInventory(GuardBT _guard)
     {
-        guard = _guard;
+        guardBT = _guard;
     }
     public override void OnEnter()
     {
 
-        guard.StateText.text = "CheckIfWeaponInInventory";
+        guardBT.StateText.text = "CheckIfWeaponInInventory";
         base.OnEnter();
     }
 
     public override NodeState Evaluate()
     {
-        if (guard.EquippedItems.Count == 0)
+        if (guardBT.EquippedItems.Count == 0)
         {
-            guard.InNeedOfWeapon = true;
+            guardBT.InNeedOfWeapon = true;
         }
         else
         {
-            guard.InNeedOfWeapon = false;
+            guardBT.InNeedOfWeapon = false;
         }
 
         //kan nog andere dingen toevoegen, zoals: check voor ammo
-        state = guard.InNeedOfWeapon ? NodeState.SUCCES : NodeState.FAILURE;
+        state = guardBT.InNeedOfWeapon ? NodeState.SUCCES : NodeState.FAILURE;
         return state;
     }
 }

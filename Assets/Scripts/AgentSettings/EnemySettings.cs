@@ -7,8 +7,8 @@ public class EnemySettings : ScriptableObject
 {
     [Header("Speed & String")]
     // Settings
-    public float minSpeed = 1;
-    public float maxSpeed = 3;
+    public float MinSpeed = 1;
+    public float MaxSpeed = 3;
     [SerializeField]
     private string weaponStr = "WeaponsStr";
     public string WeaponsStr
@@ -23,17 +23,17 @@ public class EnemySettings : ScriptableObject
         get { return targetStr; }
         private set { targetStr = value; }
     }
-    public float patrollingSpeed(float dist)
+    public float PatrollingSpeed(float dist)
     {
         float proportionalDistance = dist / SlowDist;
-        float speed = UnityEngine.Mathf.Lerp(minSpeed, maxSpeed, proportionalDistance);
+        float speed = UnityEngine.Mathf.Lerp(MinSpeed, MaxSpeed, proportionalDistance);
 
         return speed;
     }
-    public float persueSpeed(float dist)
+    public float PersueSpeed(float dist)
     {
         float proportionalDistance = (dist - StopDist) / (SlowDist - StopDist);
-        float speed = UnityEngine.Mathf.Lerp(minSpeed, maxSpeed, proportionalDistance);
+        float speed = UnityEngine.Mathf.Lerp(MinSpeed, MaxSpeed, proportionalDistance);
 
         return speed;
     }
@@ -41,6 +41,4 @@ public class EnemySettings : ScriptableObject
     public LayerMask TargetMask, WeaponMask;
     [Header("Avoidance & Detection")]
     public float PerceptionRadius = 5f, AtkRange = 2f, StopDist = 2, SlowDist = 5;
-    public float AvoidanceRadius = 1;
-
 }
