@@ -43,17 +43,14 @@ public class TaskHideFromEnemy : Node
             }
 
             float dist = Vector3.Distance(coverSpot.position, transform.position);
-            // Debug.Log("1Distance to cover spot: " + dist);
 
-            if (dist <= 3) // Changed to match the CheckHidingSpotReached condition
+            if (dist <= 5) // is hij in de buurt?
             {
-                // Debug.Log("1TaskHideFromEnemy: Reached cover spot.");
                 state = NodeState.SUCCES;
                 return state;
             }
 
             state = NodeState.RUNNING;
-            // Debug.Log("1TaskHideFromEnemy: Moving /to cover spot.");
             return state;
         }
 

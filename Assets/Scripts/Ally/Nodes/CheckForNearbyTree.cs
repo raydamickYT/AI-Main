@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using BehaviourTree;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class CheckForNearbyTree : Node

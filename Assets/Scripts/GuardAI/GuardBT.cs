@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using BehaviourTree;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine.AI;
 
 /// <summary>
