@@ -53,7 +53,7 @@ public class TaskGoToTarget : Node
         //checks if target is still in range.
         if (Vector3.Distance(transform.position, target.position) >= GuardBT.Settings.PerceptionRadius)
         {
-            ClearData(GuardBT.Settings.TargetStr);
+            blackboard.ClearData(GuardBT.Settings.TargetStr);
             // Debug.Log("out of range");
             // var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
             // GlobalBlackboard.Instance.SetVariable(str, false);

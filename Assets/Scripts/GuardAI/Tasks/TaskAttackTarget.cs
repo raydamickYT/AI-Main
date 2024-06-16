@@ -36,7 +36,7 @@ public class TaskAttackTarget : Node
         {
             //if the target is dead, we clear the data and return to patrolling.
             state = NodeState.SUCCES;
-            ClearData(GuardBT.Settings.TargetStr);
+            blackboard.ClearData(GuardBT.Settings.TargetStr);
             SceneManager.LoadScene("Dead");
             return state;
         }
