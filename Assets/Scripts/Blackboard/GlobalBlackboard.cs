@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class GlobalBlackboard
 {
+    //eerste keer dat ik een lock gebruikt
+    /// <summary>
+    /// korte uitleg: een lock statement zorgt ervoor dat maar een thread tegelijk een object kan gebruiken
+    /// als een andere thread hem dan probeert te gebruiken moet hij wachten totdat _lock wordt vrijgegeven.
+    /// Dit zorgt voor meer voorspelbare code als meerdere threads tegelijk deze instance proberen te accessen, want alles moet via 1 thread
+    /// </summary>
+    private static readonly object _lock = new object();
     private static GlobalBlackboard _instance;
     public string AttackingPlayerStr = "AttackingPlayer", IsChasingPlayerStr = "ChasingPlayer";
     private Dictionary<string, object> dictionary = new Dictionary<string, object>();
@@ -12,11 +19,14 @@ public class GlobalBlackboard
     {
         get
         {
-            if (_instance == null)
+            lock (_lock)
             {
-                _instance = new GlobalBlackboard();
+                if (_instance == null)
+                {
+                    _instance = new GlobalBlackboard();
+                }
+                return _instance;
             }
-            return _instance;
         }
     }
 

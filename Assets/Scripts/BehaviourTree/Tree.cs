@@ -10,13 +10,14 @@ namespace BehaviourTree
     {
         public Node root = null;
         private string aiID;
-        protected GlobalBlackboard blackboard = new();
+        protected GlobalBlackboard blackboard;
         public Text StateText;
         [Tooltip("Zorg dat de camera of camera holder op dit object zit.")]
         public GameObject CameraHolder;
 
         protected void Start()
         {
+            blackboard = GlobalBlackboard.Instance;
             aiID = gameObject.name;
             GlobalBlackboard.Instance.RegisterAI(aiID, transform.position);
 
