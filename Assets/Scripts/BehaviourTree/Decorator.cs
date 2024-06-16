@@ -12,7 +12,7 @@ namespace BehaviourTree
             child.Parent = this;
         }
 
-        public override void SetupBlackboard(Blackboard blackboard)
+        public override void SetupBlackboard(GlobalBlackboard blackboard)
         {
             base.SetupBlackboard(blackboard);
             child.SetupBlackboard(blackboard);

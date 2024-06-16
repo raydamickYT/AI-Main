@@ -21,7 +21,7 @@ namespace BehaviourTree
             Children.Add(node);
         }
 
-        public override void SetupBlackboard(Blackboard blackboard)
+        public override void SetupBlackboard(GlobalBlackboard blackboard)
         {
             base.SetupBlackboard(blackboard);
             //takes the Children list in the Parent node

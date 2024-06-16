@@ -26,7 +26,8 @@ public class CheckHidingSpotReached : Node
     public override NodeState Evaluate()
     {
         //if the ally is not near the hiding spot this'll return a false
-        Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
+        // Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
+        Transform coverSpot = blackboard.GetVariable<Transform>(AllyBT.Settings.TreeStr);
 
         if (coverSpot != null)
         {

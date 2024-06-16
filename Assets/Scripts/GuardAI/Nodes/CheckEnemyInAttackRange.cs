@@ -15,7 +15,8 @@ public class CheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.Settings.TargetStr);
+        // object t = GetData(GuardBT.Settings.TargetStr);
+        object t = blackboard.GetVariable<object>(GuardBT.Settings.TargetStr);
         if (t == null)
         {
             Debug.LogError($"Target not found using key {GuardBT.Settings.TargetStr}. Failing attack range check.");
@@ -40,6 +41,11 @@ public class CheckEnemyInAttackRange : Node
             state = NodeState.FAILURE;
         }
         return state;
+    }
+
+    public override void SetupBlackboard(GlobalBlackboard blackboard)
+    {
+        base.SetupBlackboard(blackboard);
     }
 
 }

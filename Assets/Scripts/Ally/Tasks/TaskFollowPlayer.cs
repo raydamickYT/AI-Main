@@ -57,8 +57,13 @@ namespace BehaviourTree
             }
             else
             {
+                //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
+                var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
+                GlobalBlackboard.Instance.SetVariable(str, true);
+                
                 //in het geval dat de parent class geen playertransform bezit.
-                playerTransform = (Transform)GetData(GuardBT.Settings.TargetStr);
+                // playerTransform = (Transform)GetData(GuardBT.Settings.TargetStr);
+                playerTransform = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
                 if (playerTransform != null)
                 {
                     nav.SetDestination(playerTransform.position);
@@ -70,10 +75,7 @@ namespace BehaviourTree
                     return state;
                 }
             }
-            //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
-            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-            GlobalBlackboard.Instance.SetVariable(str, true);
-            
+
             state = NodeState.RUNNING;
             // Debug.Log("state: " + state);
             return state;

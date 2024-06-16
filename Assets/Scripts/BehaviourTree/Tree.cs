@@ -10,7 +10,7 @@ namespace BehaviourTree
     {
         public Node root = null;
         private string aiID;
-        protected GlobalBlackboard blackboard;
+        protected GlobalBlackboard blackboard = new();
         public Text StateText;
         [Tooltip("Zorg dat de camera of camera holder op dit object zit.")]
         public GameObject CameraHolder;
@@ -23,6 +23,7 @@ namespace BehaviourTree
             //zorg dat initialization BOVEN staat. het moet voor alles geroepen worden.
             Initialization();
             root = SetupTree();
+            root.SetupBlackboard(blackboard);
         }
 
         private void Update()

@@ -22,7 +22,8 @@ public class TaskGoToTarget : Node
         //tekst aanpassen boven het hoofd van de ai
         guardBT.StateText.text = "TaskGoToTarget";
 
-        Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
+        // Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
+        Transform target = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
         UnityEngine.Debug.Log("" + target);
         if (target == null)
         {

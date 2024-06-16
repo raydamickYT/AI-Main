@@ -17,7 +17,7 @@ namespace BehaviourTree
         protected NodeState state;
         public bool WasEntered = false;
         public Node Parent;
-        protected Blackboard blackboard;
+        protected GlobalBlackboard blackboard;
         protected List<Node> Children = new();
         private Dictionary<string, object> dataContext = new();
 
@@ -44,7 +44,7 @@ namespace BehaviourTree
             dataContext[key] = value;
         }
 
-        public virtual void SetupBlackboard(Blackboard blackboard)
+        public virtual void SetupBlackboard(GlobalBlackboard blackboard)
         {
             this.blackboard = blackboard;
         }

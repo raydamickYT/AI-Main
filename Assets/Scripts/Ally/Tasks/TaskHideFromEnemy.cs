@@ -34,7 +34,8 @@ public class TaskHideFromEnemy : Node
 
     public override NodeState Evaluate()
     {
-        Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
+        // Transform coverSpot = (Transform)GetData(AllyBT.Settings.TreeStr);
+        Transform coverSpot = blackboard.GetVariable<Transform>(AllyBT.Settings.TreeStr);
         if (coverSpot != null)
         {
             if (!nav.pathPending)

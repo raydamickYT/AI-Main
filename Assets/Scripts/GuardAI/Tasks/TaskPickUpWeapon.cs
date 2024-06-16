@@ -26,14 +26,15 @@ public class TaskPickUpWeapon : Node
 
     public override NodeState Evaluate()
     {
-        object w = GetData(GuardBT.Settings.WeaponsStr);
         if (guardBT.EquippedItems.Count < 1)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, 100, GuardBT.Settings.WeaponMask);
             // Debug.Log(colliders.Length);
             if (colliders.Length > 0)
             {
-                SetData(GuardBT.Settings.WeaponsStr, colliders[0]);
+                // SetData(GuardBT.Settings.WeaponsStr, colliders[0]);
+                blackboard.SetVariable(GuardBT.Settings.WeaponsStr, colliders[0]);
+
                 GameObject item = colliders[0].gameObject;
                 float dist = Vector3.Distance(transform.position, item.transform.position);
                 // transform.position = Vector3.MoveTowards(transform.position, item.transform.position, GuardBT.settings.persueSpeed(dist) * Time.deltaTime);

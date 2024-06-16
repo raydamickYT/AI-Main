@@ -30,10 +30,10 @@ public class CheckForNearbyTree : Node
 
     public override NodeState Evaluate()
     {
-        object t = (Transform)GetData(AllyBT.Settings.TreeStr);
+        // object t = (Transform)GetData(AllyBT.Settings.TreeStr);
+        object t = blackboard.GetVariable<Transform>(AllyBT.Settings.TreeStr);
         if (t == null)
         {
-
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, AllyBT.Settings.PerceptionRadius, AllyBT.Settings.TreeMask);
             if (hitColliders.Length > 0)
             {
@@ -41,7 +41,8 @@ public class CheckForNearbyTree : Node
 
                 if (bestCoverSpot != null)
                 {
-                    Parent.Parent.SetData(AllyBT.Settings.TreeStr, bestCoverSpot);
+                    // Parent.Parent.SetData(AllyBT.Settings.TreeStr, bestCoverSpot);
+                    blackboard.SetVariable(AllyBT.Settings.TreeStr, bestCoverSpot);
 
                     // nav.SetDestination(bestCoverSpot.position);
                     state = NodeState.SUCCES;

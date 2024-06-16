@@ -64,4 +64,15 @@ public class GlobalBlackboard
         // UnityEngine.Debug.Log(name + variable.ToString());
         dictionary[name] = variable;
     }
+    public bool ClearData(string key)
+    {
+        //checks if key is in dictionary
+        if (dictionary.ContainsKey(key))
+        {
+            //succes: return true
+            dictionary.Remove(key);
+            return true;
+        }
+        return false;
+    }
 }

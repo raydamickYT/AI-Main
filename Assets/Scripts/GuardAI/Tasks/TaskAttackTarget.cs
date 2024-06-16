@@ -17,7 +17,8 @@ public class TaskAttackTarget : Node
     public override NodeState Evaluate()
     {
         string str = GlobalBlackboard.Instance.AttackingPlayerStr;
-        Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
+        // Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
+        Transform target = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
 
         float dist = Vector3.Distance(transform.position, target.position);
         // Debug.Log(dist);

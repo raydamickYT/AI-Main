@@ -47,7 +47,7 @@ public class GuardBT : Tree
                             new TaskPickUpWeapon(transform, nav, this),
                         }),
                         new Parallel(new List<Node>{
-                            new TaskGoToTarget(transform, nav, this),
+                            // new TaskGoToTarget(transform, nav, this),
                             new TaskFollowPlayer(transform, null, nav), // Volgt de speler als alternatief gedrag
                             new TaskAttackTarget(transform),
                         }),

@@ -57,7 +57,8 @@ public class TaskThrowProjectile : Node
         }
 
         // Logic to throw projectile
-        object t = GetData(settings.ThrownObjectStr + projectileCounter);
+        // object t = GetData(settings.ThrownObjectStr + projectileCounter);
+        object t = blackboard.GetVariable<object>(settings.ThrownObjectStr + projectileCounter);
         Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
 
         if (startPos == null) startPos = transform;

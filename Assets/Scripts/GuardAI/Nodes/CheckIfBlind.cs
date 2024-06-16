@@ -30,8 +30,11 @@ public class CheckIfBlind : Decorator
         }
         else
         {
-            Transform t = (Transform)GetData(GuardBT.Settings.TargetStr);
-            child.SetData(GuardBT.Settings.TargetStr, t);
+            // Transform t = (Transform)GetData(GuardBT.Settings.TargetStr);
+            Transform t = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
+            // child.SetData(GuardBT.Settings.TargetStr, t);
+            blackboard.SetVariable(GuardBT.Settings.TargetStr, t);
+
 
             state = child.Evaluate();  //dus als de rook bom niet actief is kan de enemy gewoon zien
             if (state == NodeState.SUCCES)
@@ -43,7 +46,7 @@ public class CheckIfBlind : Decorator
             return state;
         }
     }
-    public override void SetupBlackboard(Blackboard blackboard)
+    public override void SetupBlackboard(GlobalBlackboard blackboard)
     {
         base.SetupBlackboard(blackboard);
         child.SetupBlackboard(blackboard);

@@ -2,7 +2,6 @@ using UnityEngine;
 using BehaviourTree;
 public class CheckEnemyNear : Node
 {
-
     private Transform transform;
 
     public CheckEnemyNear(Transform _transform, LayerMask _enemyMask)
@@ -29,7 +28,7 @@ public class CheckEnemyNear : Node
             {
                 // Enemy is within perception radius
                 Debug.Log("Parent" + Parent);
-                Parent.Parent.SetData(AllyBT.Settings.PlayerTargetStr, enemyPosition);
+                blackboard.SetVariable(AllyBT.Settings.PlayerTargetStr, enemyPosition);
                 state = NodeState.SUCCES;
             }
             else

@@ -34,7 +34,8 @@ public class CheckEnemyInFOVRange : Node
     }
     public override NodeState Evaluate()
     {
-        object t = GetData(GuardBT.Settings.TargetStr);
+        // object t = GetData(GuardBT.Settings.TargetStr);
+        object t = blackboard.GetVariable<object>(GuardBT.Settings.TargetStr);
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, GuardBT.Settings.PerceptionRadius, GuardBT.Settings.TargetMask);
@@ -42,7 +43,9 @@ public class CheckEnemyInFOVRange : Node
             {
                 //we store the collider  the root in case we collide with an enemy. 
                 //the root is 2 levels above, thus the parent.parent
-                Parent.Parent.SetData(GuardBT.Settings.TargetStr, colliders[0].transform);
+                // Parent.Parent.SetData(GuardBT.Settings.TargetStr, colliders[0].transform);
+                blackboard.SetVariable(GuardBT.Settings.TargetStr, colliders[0].transform);
+
 
                 //laat aan de ally weten dat hij hem heeft gezien en is begonnen met chasen.
                 var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
