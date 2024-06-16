@@ -7,12 +7,12 @@ public class TaskWaitForSeconds : Node
 {
     private float duration;
     private float startTime;
-    private GuardBT guardBT;
+    private BehaviourTree.Tree behaviourTree;
 
-    public TaskWaitForSeconds(GuardBT _guardBT, float duration)
+    public TaskWaitForSeconds(BehaviourTree.Tree _BT, float duration)
     {
         this.duration = duration;
-        guardBT = _guardBT;
+        behaviourTree = _BT;
     }
 
     public override void OnEnter()
@@ -27,7 +27,7 @@ public class TaskWaitForSeconds : Node
         float remainingTime = Mathf.Max(0, duration - elapsedTime);
 
         //tekst aanpassen boven het hoofd van de ai
-        guardBT.StateText.text = "TaskWaitforSeconds: " + remainingTime.ToString("F2");
+        behaviourTree.StateText.text = "TaskWaitforSeconds: " + remainingTime.ToString("F2");
         
         if (Time.time - startTime > duration)
         {
