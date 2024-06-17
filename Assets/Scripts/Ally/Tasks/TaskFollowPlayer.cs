@@ -57,16 +57,16 @@ namespace BehaviourTree
             }
             else
             {
-                //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
-                var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-                GlobalBlackboard.Instance.SetVariable(str, true);
-                
+                UnityEngine.Debug.LogWarning("Tot hier");
                 //in het geval dat de parent class geen playertransform bezit.
-                // playerTransform = (Transform)GetData(GuardBT.Settings.TargetStr);
+                //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
+                GlobalBlackboard.Instance.SetVariable(GlobalBlackboard.Instance.IsChasingPlayerStr, true);
+
                 playerTransform = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
                 if (playerTransform != null)
                 {
                     nav.SetDestination(playerTransform.position);
+                    playerTransform = null;
                 }
                 else
                 {

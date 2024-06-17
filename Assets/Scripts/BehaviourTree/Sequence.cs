@@ -37,6 +37,7 @@ namespace BehaviourTree
                 }
 
                 NodeState nodeState = node.Evaluate();
+                Debug.Log($"Sequence Node: Child {i} returned {nodeState}");
 
                 switch (nodeState)
                 {
@@ -53,7 +54,7 @@ namespace BehaviourTree
                         node.WasEntered = false;
                         continue;
                     case NodeState.RUNNING:
-                        // Debug.Log("Node " + i + " is running.");
+                        Debug.Log($"Sequence Node: Child {i} is running");
                         currentIndex = i; // Store the current index
                         state = NodeState.RUNNING;
                         return state;

@@ -31,6 +31,7 @@ public class GuardBT : Tree
                     new CheckIfBlind(this, EnemyBehaviour()),
                     new TaskWaitForSeconds(this, 10),
                 }),
+                    // EnemyBehaviour(),
                 new TaskPatrol(transform, WayPoints, nav),
             }) :
             new TaskPatrol(transform, WayPoints, nav);
@@ -47,6 +48,7 @@ public class GuardBT : Tree
                             new TaskPickUpWeapon(transform, nav, this),
                         }),
                         new Parallel(new List<Node>{
+                            new CheckEnemyInFOVRange(transform),
                             // new TaskGoToTarget(transform, nav, this),
                             new TaskFollowPlayer(transform, null, nav), // Volgt de speler als alternatief gedrag
                             new TaskAttackTarget(transform),

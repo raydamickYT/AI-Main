@@ -6,6 +6,7 @@ using UnityEngine;
 public class CheckIfBlind : Decorator
 {
     private GuardBT guardBT;
+    private bool wasBlind;
     public CheckIfBlind(GuardBT _guard, Node _child) : base(_child)
     {
         guardBT = _guard;
@@ -30,17 +31,21 @@ public class CheckIfBlind : Decorator
         }
         else
         {
+            if(wasBlind){
+                wasBlind = false;
+                // blackboard.ClearData();
+            }
             // Transform t = (Transform)GetData(GuardBT.Settings.TargetStr);
-            Transform t = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
-            // child.SetData(GuardBT.Settings.TargetStr, t);
-            blackboard.SetVariable(GuardBT.Settings.TargetStr, t);
+            // Transform t = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
+            // // child.SetData(GuardBT.Settings.TargetStr, t);
+            // blackboard.SetVariable(GuardBT.Settings.TargetStr, t);
 
 
             state = child.Evaluate();  //dus als de rook bom niet actief is kan de enemy gewoon zien
             if (state == NodeState.SUCCES)
             {
                 //dit doe ik om te vorkomen dat de volgende task wordt uitgevoerd. anders staat de ai stil nadat hij zn wapen oppakt
-                state = NodeState.FAILURE;
+                state = NodeState.RUNNING;
             }
 
             return state;

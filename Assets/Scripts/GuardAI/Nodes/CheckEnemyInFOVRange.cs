@@ -34,8 +34,9 @@ public class CheckEnemyInFOVRange : Node
     }
     public override NodeState Evaluate()
     {
+        Debug.LogWarning("t bestaat");
         // object t = GetData(GuardBT.Settings.TargetStr);
-        object t = blackboard.GetVariable<object>(GuardBT.Settings.TargetStr);
+        Transform t = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
         if (t == null)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, GuardBT.Settings.PerceptionRadius, GuardBT.Settings.TargetMask);
@@ -48,8 +49,8 @@ public class CheckEnemyInFOVRange : Node
 
 
                 //laat aan de ally weten dat hij hem heeft gezien en is begonnen met chasen.
-                var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-                GlobalBlackboard.Instance.SetVariable(str, true);
+                var str = blackboard.IsChasingPlayerStr;
+                blackboard.SetVariable(str, true);
 
                 state = NodeState.SUCCES;
                 return state;
@@ -58,7 +59,23 @@ public class CheckEnemyInFOVRange : Node
             state = NodeState.FAILURE;
             return state;
         }
+        else
+        {
+            // Controleer of het bestaande target nog steeds binnen bereik is
+            float distanceToTarget = Vector3.Distance(transform.position, t.position);
+            if (distanceToTarget > GuardBT.Settings.PerceptionRadius)
+            {
+                // Reset het target als het buiten bereik is
+                // blackboard.SetVariable(GuardBT.Settings.TargetStr, default(Transform)); 
+                blackboard.ClearData(GuardBT.Settings.TargetStr);
+                var str = blackboard.IsChasingPlayerStr;
+                blackboard.SetVariable(str, false);
 
+                Debug.Log("CheckEnemyInFOVRange: Target out of range, setting state to FAILURE");
+                state = NodeState.FAILURE;
+                return state;
+            }
+        }
         state = NodeState.SUCCES;
         return state;
     }
