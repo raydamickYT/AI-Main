@@ -14,7 +14,7 @@ namespace BehaviourTree
         }
         public override NodeState Evaluate()
         {
-            bool isChasing = GlobalBlackboard.Instance.GetVariable<bool>(GlobalBlackboard.Instance.IsChasingPlayerStr);
+            bool isChasing = blackboard.GetVariable<bool>(blackboard.IsChasingPlayerStr);
             if (isChasing) //als de enemy niet meer aanvalt dan kan de ally stoppen met hiden (dus dan returned er een succes)
             {
                 return NodeState.FAILURE;

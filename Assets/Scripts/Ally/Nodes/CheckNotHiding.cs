@@ -23,8 +23,8 @@ public class CheckShouldHide : Decorator
         // Controleer hier of de ally nog steeds moet schuilen.
         // Dit kan gebaseerd zijn op een variabele in de blackboard of andere logica.
         // Voor dit voorbeeld controleer ik een fictieve variabele "shouldHide".
-        string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-        bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
+        string str = blackboard.IsChasingPlayerStr;
+        bool shouldHide = blackboard.GetVariable<bool>(str);
         // Debug.LogWarning("should hide: " + GlobalBlackboard.Instance.GetVariable<bool>(str));
 
         if (!shouldHide)

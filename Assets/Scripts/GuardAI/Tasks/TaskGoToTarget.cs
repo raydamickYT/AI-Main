@@ -40,8 +40,8 @@ public class TaskGoToTarget : Node
         else
         {
             //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
-            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-            GlobalBlackboard.Instance.SetVariable(str, true);
+            var str = blackboard.IsChasingPlayerStr;
+            blackboard.SetVariable(str, true);
         }
         //checks if guard is near the target
         if (dist > GuardBT.Settings.StopDist)

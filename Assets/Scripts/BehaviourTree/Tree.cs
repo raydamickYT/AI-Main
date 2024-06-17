@@ -19,7 +19,7 @@ namespace BehaviourTree
         {
             blackboard = GlobalBlackboard.Instance;
             aiID = gameObject.name;
-            GlobalBlackboard.Instance.RegisterAI(aiID, transform.position);
+            blackboard.RegisterAI(aiID, transform.position);
 
             //zorg dat initialization BOVEN staat. het moet voor alles geroepen worden.
             Initialization();
@@ -31,7 +31,7 @@ namespace BehaviourTree
         {
             if (root != null)
             {
-                GlobalBlackboard.Instance.UpdateAIPosition(aiID, transform.position);
+                blackboard.UpdateAIPosition(aiID, transform.position);
 
                 root.Evaluate();
             }
@@ -45,7 +45,7 @@ namespace BehaviourTree
         void OnDestroy()
         {
             //verwijder de ai weer uit de global blackboard
-            GlobalBlackboard.Instance.UnregisterAI(aiID);
+            blackboard.UnregisterAI(aiID);
         }
         protected abstract Node SetupTree();
         protected virtual void Initialization() { }

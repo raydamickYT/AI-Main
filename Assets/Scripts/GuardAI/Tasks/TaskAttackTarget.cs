@@ -16,7 +16,7 @@ public class TaskAttackTarget : Node
 
     public override NodeState Evaluate()
     {
-        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
+        string str = blackboard.AttackingPlayerStr;
         // Transform target = (Transform)GetData(GuardBT.Settings.TargetStr);
         Transform target = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
 
@@ -27,7 +27,7 @@ public class TaskAttackTarget : Node
             if (dist <= GuardBT.Settings.StopDist + 0.5) //small offset because the enemy ai stops just shy of 1 from the player
             {
                 //if this is true, the enemy is attacking.
-                GlobalBlackboard.Instance.SetVariable(str, true);
+                blackboard.SetVariable(str, true);
                 playerIsDead = true;
             }
 

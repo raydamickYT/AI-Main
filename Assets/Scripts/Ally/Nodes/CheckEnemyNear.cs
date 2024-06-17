@@ -17,7 +17,7 @@ public class CheckEnemyNear : Node
     //checks if there is an enemy near and adds its transform to a list for future use.
     public override NodeState Evaluate()
     {
-        Vector3 enemyPosition = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
+        Vector3 enemyPosition = blackboard.GetAIPosition("EnemyGuard");
 
         // Check if enemy position is valid (not Vector3.zero, or use a different method to validate)
         if (enemyPosition != Vector3.zero)

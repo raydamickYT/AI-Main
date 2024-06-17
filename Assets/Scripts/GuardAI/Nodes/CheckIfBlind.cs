@@ -19,11 +19,11 @@ public class CheckIfBlind : Decorator
 
     public override NodeState Evaluate()
     {
-        bool IsBlind = GlobalBlackboard.Instance.GetVariable<bool>("EnemyIsBlind");
+        bool IsBlind = blackboard.GetVariable<bool>("EnemyIsBlind");
         if (IsBlind)
         {
-            var str = GlobalBlackboard.Instance.IsChasingPlayerStr;
-            GlobalBlackboard.Instance.SetVariable(str, false);
+            var str = blackboard.IsChasingPlayerStr;
+            blackboard.SetVariable(str, false);
             state = NodeState.SUCCES;
             return state;
 

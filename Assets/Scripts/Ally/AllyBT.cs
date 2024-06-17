@@ -72,7 +72,7 @@ namespace BehaviourTree
                 UnityEngine.Debug.LogWarning("no navmesh on the AllyAI");
             }
 
-            GlobalBlackboard.Instance.SetVariable("ShouldHide", false);
+            blackboard.SetVariable("ShouldHide", false);
             Nav.speed = Settings.MaxSpeed;
             Nav.stoppingDistance = Settings.SlowDist;
         }

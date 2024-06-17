@@ -94,7 +94,7 @@ public class CheckForNearbyTree : Node
     float RateCoverSpot(Vector3 coverPosition)
     {
         float rating = 0f;
-        Vector3 postionOfEnemy = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
+        Vector3 postionOfEnemy = blackboard.GetAIPosition("EnemyGuard");
 
         // Offset the start position of the raycast slightly towards the AI
         Debug.DrawLine(postionOfEnemy, coverPosition, Color.red, 5);

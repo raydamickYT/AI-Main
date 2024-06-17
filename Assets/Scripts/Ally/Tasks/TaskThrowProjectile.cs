@@ -41,7 +41,7 @@ public class TaskThrowProjectile : Node
         if (ThrownObject != null)
         {
             hasThrown = true;
-            GlobalBlackboard.Instance.SetVariable("hasThrown", hasThrown);
+            blackboard.SetVariable("hasThrown", hasThrown);
             // SetData(settings.ThrownObjectStr +projectileCounter, ThrownObject.transform);
             // projectileCounter++;
             Debug.Log("Projectile thrown" + projectileCounter);
@@ -64,7 +64,7 @@ public class TaskThrowProjectile : Node
         base.OnEnter();
         // Reset waiting state on enter
         Debug.LogWarning("Wasfinished" + hasThrown);
-        hasThrown = GlobalBlackboard.Instance.GetVariable<bool>("hasThrown");
+        hasThrown = blackboard.GetVariable<bool>("hasThrown");
 
         Debug.LogWarning("Hoi");
 
