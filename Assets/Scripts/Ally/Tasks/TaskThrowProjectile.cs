@@ -25,23 +25,20 @@ public class TaskThrowProjectile : Node
         if (hasThrown)
         {
             // Debug.Log("Already thrown, returning SUCCESS");
-            state = NodeState.SUCCES;
+            state = NodeState.FAILURE;
             return state;
         }
-
-        string str = GlobalBlackboard.Instance.AttackingPlayerStr;
-        bool isAllowedToThrow = GlobalBlackboard.Instance.GetVariable<bool>(str);
 
         // Logic to throw projectile
         // object t = GetData(settings.ThrownObjectStr + projectileCounter);
         object t = blackboard.GetVariable<object>(settings.ThrownObjectStr + projectileCounter);
-        Vector3 positionOfAgent1 = GlobalBlackboard.Instance.GetAIPosition("EnemyGuard");
+        Vector3 positionOfAgent1 = blackboard.GetAIPosition("EnemyGuard");
 
         if (startPos == null) startPos = transform;
 
         GameObject ThrownObject = settings.ThrowObject(startPos, positionOfAgent1, 85);
 
-        if (ThrownObject != null && !hasThrown)
+        if (ThrownObject != null)
         {
             hasThrown = true;
             GlobalBlackboard.Instance.SetVariable("hasThrown", hasThrown);
@@ -57,9 +54,6 @@ public class TaskThrowProjectile : Node
             state = NodeState.FAILURE;
             return state;
         }
-        // if (t == null)
-        // {
-        // }
 
         // state = NodeState.FAILURE;
         // return state;
@@ -69,7 +63,10 @@ public class TaskThrowProjectile : Node
     {
         base.OnEnter();
         // Reset waiting state on enter
+        Debug.LogWarning("Wasfinished" + hasThrown);
         hasThrown = GlobalBlackboard.Instance.GetVariable<bool>("hasThrown");
+
+        Debug.LogWarning("Hoi");
 
         //update tekst boven ai hoofd
         if (allyBT == null)

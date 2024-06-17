@@ -25,18 +25,21 @@ public class CheckShouldHide : Decorator
         // Voor dit voorbeeld controleer ik een fictieve variabele "shouldHide".
         string str = GlobalBlackboard.Instance.IsChasingPlayerStr;
         bool shouldHide = GlobalBlackboard.Instance.GetVariable<bool>(str);
-        Debug.LogWarning("should hide: " + GlobalBlackboard.Instance.GetVariable<bool>(str));
+        // Debug.LogWarning("should hide: " + GlobalBlackboard.Instance.GetVariable<bool>(str));
 
         if (!shouldHide)
         {
             blackboard.ClearData(AllyBT.Settings.TreeStr);
-            
+
             state = NodeState.FAILURE;
             return state;
         }
         else
         {
-            state = child.Evaluate();
+            if (!blackboard.GetVariable<bool>("hasThrown"))
+            {
+                state = child.Evaluate();
+            }
             return state;
         }
     }

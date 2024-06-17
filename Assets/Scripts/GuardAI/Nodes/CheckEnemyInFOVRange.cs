@@ -34,7 +34,6 @@ public class CheckEnemyInFOVRange : Node
     }
     public override NodeState Evaluate()
     {
-        Debug.LogWarning("t bestaat");
         // object t = GetData(GuardBT.Settings.TargetStr);
         Transform t = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
         if (t == null)

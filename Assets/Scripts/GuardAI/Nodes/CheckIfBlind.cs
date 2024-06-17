@@ -6,7 +6,6 @@ using UnityEngine;
 public class CheckIfBlind : Decorator
 {
     private GuardBT guardBT;
-    private bool wasBlind;
     public CheckIfBlind(GuardBT _guard, Node _child) : base(_child)
     {
         guardBT = _guard;
@@ -31,10 +30,6 @@ public class CheckIfBlind : Decorator
         }
         else
         {
-            if(wasBlind){
-                wasBlind = false;
-                // blackboard.ClearData();
-            }
             // Transform t = (Transform)GetData(GuardBT.Settings.TargetStr);
             // Transform t = blackboard.GetVariable<Transform>(GuardBT.Settings.TargetStr);
             // // child.SetData(GuardBT.Settings.TargetStr, t);

@@ -57,7 +57,6 @@ namespace BehaviourTree
             }
             else
             {
-                UnityEngine.Debug.LogWarning("Tot hier");
                 //in het geval dat de parent class geen playertransform bezit.
                 //hier nog een extra flag switch, omdat het soms voorkomt dat de ai niet langs de check node komt.
                 GlobalBlackboard.Instance.SetVariable(GlobalBlackboard.Instance.IsChasingPlayerStr, true);

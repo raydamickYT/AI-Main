@@ -27,9 +27,12 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log("isblind Collision");
         GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", true);
-        yield return new WaitForSeconds(time);
-        GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", false);
+        yield return new WaitForSeconds(time / 3);
         Destroy(this.gameObject);
+        GlobalBlackboard.Instance.SetVariable("EnemyIsBlind", false);
+        // yield return new WaitForSeconds(time);
+        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
+
     }
     void OnCollisionEnter(Collision other)
     {
@@ -38,9 +41,5 @@ public class Projectile : MonoBehaviour
             Debug.Log("rook bom gaat af");
             StartCoroutine(SmokeBombEffect(3));
         }
-    }
-    void OnDestroy()
-    {
-        GlobalBlackboard.Instance.SetVariable("hasThrown", false);
     }
 }
